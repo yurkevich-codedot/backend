@@ -772,6 +772,7 @@ body {
   gap: 5px;
   line-height: 20px;
 }
+
 #dashboardMenu {
   display: none;
 }
@@ -792,6 +793,7 @@ body {
 }
 @media (max-width: 1279.98px) {
   .backdrop {
+    transition: opacity 0.25s ease;
     background-color: #747474;
     height: 100%;
     left: 0;
@@ -806,6 +808,7 @@ body {
   font-family: var(--fontFamily-comforta);
   justify-content: flex-start;
   width: max-content;
+  transition: left 0.25s ease;
 }
 @media (min-width: 1280px) {
   .dashboard {
