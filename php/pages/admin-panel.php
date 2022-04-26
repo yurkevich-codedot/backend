@@ -284,7 +284,6 @@ require("../scripts/selectinfo.php")
                 <select class="admin-panel__data-kit-select">
                   <option>4</option>
                   <option>8</option>
-                  <option>16</option>
                 </select>
               </div>
               <div class="admin-panel__data-kit-select">

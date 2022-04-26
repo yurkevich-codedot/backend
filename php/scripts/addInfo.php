@@ -11,9 +11,8 @@ if(mysqli_query($mysqli, "INSERT INTO `attraction` ( `name` , `category_id` , `a
 VALUES ('$name' , '$category_id' , '$address' , '$locality_id' , '$date' , 0)"))
 {
     echo "<script>alert('Вы успешно добавили новую запись')</script>";
-    echo "<script>window.location.href = '../pages/admin-panel.php';</script>";
 }
-
+echo "<script>window.location.href = '../pages/admin-panel.php';</script>";
 
 
 ?>
