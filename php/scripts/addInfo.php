@@ -1,18 +1,35 @@
 <?php
 require_once('connect.php');
+$table = $_GET['table'];
+$data_columns = mysqli_query($mysqli, 'SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+WHERE `TABLE_NAME`="' . $_GET['table'].'" ORDER BY ordinal_position');
+$data_columns = mysqli_fetch_all($data_columns);
 
-$name = $_POST['name'];
-$category_id = $_POST['category_id'];
-$address = $_POST['address'];
-$locality_id = $_POST['locality_id'];
-$date = $_POST['date'];
+$sql = "INSERT INTO ".$_GET['table']." VALUES (NULL";
+$i = 0;
+foreach($data_columns as $item){
+    if($item[0]=='id')
+    {
+        continue;
+    }
+    echo $_POST[$item[0]] . "<br>";
+    $sql.= "," . "'" . $_POST[$item[0]]. "'";
+    
+}
+if($isRating)
+{
+    $sql.=")";
+}
+else
+{
+    $sql.=")";
+}
+echo $sql;
 
-if(mysqli_query($mysqli, "INSERT INTO `attraction` ( `name` , `category_id` , `address` , `locality_id`, `date` , `rating` )
-VALUES ('$name' , '$category_id' , '$address' , '$locality_id' , '$date' , 0)"))
+if(mysqli_query($mysqli, $sql))
 {
     echo "<script>alert('Вы успешно добавили новую запись')</script>";
+    echo "<script>window.location.href='../pages/admin-panel.php';</script>";
 }
-echo "<script>window.location.href = '../pages/admin-panel.php';</script>";
-
 
 ?>
