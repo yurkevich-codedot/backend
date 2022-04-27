@@ -16,6 +16,8 @@ while($categories_list = mysqli_fetch_assoc($array_categories))
 {
   $categories[] = $categories_list;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

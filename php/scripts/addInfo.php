@@ -6,7 +6,6 @@ WHERE `TABLE_NAME`="' . $_GET['table'].'" ORDER BY ordinal_position');
 $data_columns = mysqli_fetch_all($data_columns);
 
 $sql = "INSERT INTO ".$_GET['table']." VALUES (NULL";
-$i = 0;
 foreach($data_columns as $item){
     if($item[0]=='id')
     {
@@ -29,7 +28,7 @@ echo $sql;
 if(mysqli_query($mysqli, $sql))
 {
     echo "<script>alert('Вы успешно добавили новую запись')</script>";
-    echo "<script>window.location.href='../pages/admin-panel.php';</script>";
+    echo "<script>window.location.href='../pages/admin-panel.php?table=".$_GET['table']."';</script>";
 }
 
 ?>
