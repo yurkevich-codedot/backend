@@ -28,7 +28,7 @@ else
 {
     $sql.=")";
 }
-echo $sql;
+
 
 if(mysqli_query($mysqli, $sql))
 {

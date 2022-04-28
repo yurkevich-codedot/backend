@@ -46,7 +46,6 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
             <div class="login__input-wrapper-inner">
                 <?
                 $data_columns = mysqli_fetch_all($data_columns);
-                $i=1;
                 foreach($data_columns as $item){
                   if($item[0]=='id')
                   {
