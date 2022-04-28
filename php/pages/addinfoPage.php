@@ -1,4 +1,5 @@
 <?
+session_start();
 require("../scripts/connect.php");
 $table = $_GET['table'];
 $data_columns = mysqli_query($mysqli, 'SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`="' . $_GET['table'].'" ORDER BY ordinal_position');
@@ -26,7 +27,8 @@ while($categories_list = mysqli_fetch_assoc($array_categories))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/style.css" />
-    <title>Document</title>
+    <link rel="icon" href="../icon/favicon.ico" type="image/x-icon"/>
+    <title>Add | <?echo $_GET['table']?></title>
 </head>
 <body>
 <section class="login">
@@ -44,7 +46,11 @@ while($categories_list = mysqli_fetch_assoc($array_categories))
                 <?
                 $data_columns = mysqli_fetch_all($data_columns);
                 foreach($data_columns as $item){
-                 if($item[0]=='id')
+                  if($item[0]=='id')
+                  {
+                    continue;
+                  }
+                  if($item[0]=='role')
                   {
                     continue;
                   }
@@ -68,7 +74,8 @@ while($categories_list = mysqli_fetch_assoc($array_categories))
                     }
                     echo '</select>';                   
                   }
-                  else{
+                  else
+                  {
                     echo '<div class="login__input-name">'.$item[0].'</div>
                     <input class="login__input" name="'.$item[0].'" placeholder="'.$item[0].'" />';
                   }

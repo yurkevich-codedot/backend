@@ -1,4 +1,5 @@
 <?
+session_start();
 require("../scripts/connect.php");
 $table = $_GET['table'];
 $id = $_GET['id'];
@@ -27,7 +28,8 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/style.css" />
-    <title>Document</title>
+    <link rel="icon" href="../icon/favicon.ico" type="image/x-icon"/>
+    <title>Update | <?echo $_GET['table']?></title>
 </head>
 <body>
 <section class="login">
@@ -44,11 +46,12 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
             <div class="login__input-wrapper-inner">
                 <?
                 $data_columns = mysqli_fetch_all($data_columns);
+                $i=1;
                 foreach($data_columns as $item){
                   if($item[0]=='id')
                   {
-                    echo '<div class="login__input-name">'.$item[0].'</div>
-                    <input class="login__input" name="'.$item[0].'" value="'.$id.'" readonly/>';
+                    echo '<div class="login__input-name" style="display:none">'.$item[0].'</div>
+                    <input type="hidden" class="login__input" name="'.$item[0].'" value="'.$id.'" readonly/>';
                   }
                   if($item[0]=='id')
                   {
@@ -76,7 +79,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
                   }
                   else{
                     echo '<div class="login__input-name">'.$item[0].'</div>
-                    <input class="login__input" name="'.$item[0].'" placeholder="'.$item[0].'" />';
+                    <input class="login__input" name="'.$item[0].'" value="'.$cur_data[0].'" placeholder="'.$item[0].'"/>';
                   }
                 }
                 ?>
@@ -84,14 +87,14 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
             <div class="login__input-wrapper-inner">
                 <button class="btn">
                 <a href="../scripts/addInfo.php">
-                    <span class="btn-text">Добавить</span>
+                    <span class="btn-text">Редактировать</span>
                 </a>
                 </button>
             </div>
             </div>
         </form>
         <div class="login__footer">
-          <a href="../pages/admin-panel.php" class="login__footer-link">Выход</a>
+          <a href="../pages/admin-panel.php?table="<?echo $_GET['title']?>" class="login__footer-link">Выход</a>
         </div>
       </div>
     </div>

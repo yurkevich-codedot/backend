@@ -10,7 +10,7 @@ require("../scripts/connect.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="icon" href="../icon/favicon.ico" type="image/x-icon"/>
-    <title>Login</title>
+    <title>Registration</title>
   </head>
   <body></body>
 </html>
@@ -48,42 +48,41 @@ require("../scripts/connect.php");
               </defs>
             </svg>
           </div>
-          <h2 class="login__title">ВХОД</h2>
+          <h2 class="login__title">Регистрация</h2>
           <div class="login__discription">
-            Введите адрес электронной почты и пароль ниже
+            Заполните адрес электронной почты и пароль ниже
           </div>
         </div>
-        <form action="../scripts/login.php" method="get">
-        <div class="login__input-wrapper">
-          <div class="login__input-wrapper-inner">
-            <div class="login__input-name">Эл. почта</div>
-            <input
-              type="email"
-              class="login__input"
-              placeholder="Электронная почта"
-              name="email"
-            />
-          </div>
-          <div class="login__input-wrapper-inner">
-            <div class="login__input-name">
-              Пароль
-              <a href="#" class="link">Забыли пароль?</a>
+        <form action="../scripts/registration.php" method="post">
+          <div class="login__input-wrapper">
+            <div class="login__input-wrapper-inner">
+              <div class="login__input-name">Эл. почта</div>
+              <input
+                type="email"
+                class="login__input"
+                placeholder="Электронная почта"
+                name="email"
+              />
             </div>
-            <input type="password" class="login__input" placeholder="Пароль" name="password"/>
-          </div>
-          <div class="login__input-wrapper-inner">
-          <a href="../pages/admin-panel.php">
-              <button type="submit" class="btn" name="submit">
-                    <span class="btn-text">Войти</span>
+            <div class="login__input-wrapper-inner">
+              <div class="login__input-name">
+                Пароль
+              </div>
+              <input type="password" class="login__input" name="password" placeholder="Пароль" />
+            </div>
+            <div class="login__input-wrapper-inner">
+            <a href="../scripts/registration.php">
+              <button type="submit" class="btn">
+                    <span class="btn-text">Зарегистрироваться</span>
               </button>
             </a >
+            </div>
           </div>
-        </div>
-        </form>
-        <div class="login__footer">
-          <div class="login__footer-discription">У вас ещё нет аккаунта?</div>
-          <a href="../pages/registrationPage.php" class="login__footer-link">Регистрация</a>
-        </div>
+          </form>
+          <div class="login__footer">
+            <div class="login__footer-discription">У вас есть аккаунт?</div>
+              <a href="../pages/loginPage.php" class="login__footer-link">Выйти</a>
+          </div>
       </div>
     </div>
   </div>

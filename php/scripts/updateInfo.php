@@ -5,12 +5,6 @@ $data_columns = mysqli_query($mysqli, 'SELECT `COLUMN_NAME` FROM `INFORMATION_SC
 WHERE `TABLE_NAME`="' . $_GET['table'].'" ORDER BY ordinal_position');
 $data_columns = mysqli_fetch_all($data_columns);
 $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
-// $data=mysqli_fetch_all($data);
-echo $id . "<hr>";
-
-//UPDATE `attraction` SET `name` = 'ЦЕРКОВЬ СВ. МУЧЕНИЦ МИНОДОРЫ, МИТРОДОРЫ, НИМФОДОРЫs', `category_id` = '3', `address` = 'ул. Советскаяs', `locality_id` = '9', `date` = '1950-02-09' WHERE `attraction`.`id` = 30
-
-
 $sql="UPDATE ".$_GET['table']." SET ";
 $selectTable = $_REQUEST['table'];
 unset($_REQUEST['table']);

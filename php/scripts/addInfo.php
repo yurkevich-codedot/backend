@@ -11,13 +11,18 @@ foreach($data_columns as $item){
     {
         continue;
     }
+    if($item[0]=='role')
+    {
+        $isRole = true;
+        continue;
+    }
     echo $_POST[$item[0]] . "<br>";
     $sql.= "," . "'" . $_POST[$item[0]]. "'";
     
 }
-if($isRating)
+if($isRole)
 {
-    $sql.=")";
+    $sql.=",'user')";
 }
 else
 {

@@ -428,6 +428,7 @@ body {
 .btn {
   background-color: #3751ff;
   border: 0;
+  width: 100%;
   border-radius: var(--border-radius);
   box-shadow: 0 4px 12px rgba(55, 81, 255, 0.24);
   padding: 11px 16px;
@@ -604,6 +605,8 @@ body {
   }
 }
 .admin-panel__user {
+  display: flex;
+  gap: 10px;
   font-weight: 700;
   line-height: 30px;
 }
@@ -631,6 +634,7 @@ body {
   padding-right: 10px;
 }
 .admin-panel__data-items-wrapper {
+  max-height: 350px;
   position: relative;
 }
 @media (max-width: 991.98px) {
@@ -685,6 +689,7 @@ body {
   align-items: center;
   gap: 10px;
 }
+
 .admin-panel__data-kit {
   background-color: var(--background-default);
   border: 0.5px solid #00000085;
@@ -882,7 +887,8 @@ body {
   text-decoration: none;
   cursor: pointer;
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: 5px;
   padding: 20px;
   position: relative;
   transition: 0.2s ease;
