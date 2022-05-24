@@ -13,18 +13,27 @@
   </head>
   <body>
     <section class="background">
-      <picture><img src="../../img/uploads/background.png" class="background__img" alt="background" /></picture>
+      <picture
+        ><img
+          src="./img/uploads/background.png"
+          class="background__img"
+          alt="background"
+      /></picture>
       <div class="container">
         <div class="content__discription-wrapper">
           <div class="main__navigation">
             <a href="main.html" class="main__breadcrump">Главная</a>
-            <a href="content.html" class="main__breadcrump">Достопримечательности</a>
+            <a href="content.html" class="main__breadcrump"
+              >Достопримечательности</a
+            >
             <a href="#" class="main__breadcrump">Три штыка</a>
           </div>
-          <div class="content__discription"><h1 class="main__title">Достопримечательности</h1></div>
+          <div class="content__discription">
+            <h1 class="main__title">Достопримечательности</h1>
+          </div>
         </div>
       </div>
     </section>
-    <script src="/js/main.min.js"></script>
+    <script src="./js/main.min.js"></script>
   </body>
 </html>

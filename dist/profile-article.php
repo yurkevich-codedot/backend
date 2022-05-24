@@ -1,77 +1,68 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=5,minimum-scale=1"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Profile</title>
-    <link rel="stylesheet" href="css/main.min.css" />
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
-  </head>
-  <body>
-    <header class="header" id="myHeader">
-      <div class="header__wrapper">
-        <a href="main.html" class="header__title">Достопримечательности Витебской области</a>
-        <input type="checkbox" id="menu" />
-        <label class="menu" for="menu"
-          ><div class="header__menu-btn"><div class="header__menu-icon"></div></div
-        ></label>
-        <label class="backdrop" for="menu"></label>
-        <nav class="header__nav-wrapper">
-          <div class="header__cross-wrapper">
-            <label for="menu"><div class="header__cross"></div></label>
-          </div>
-          <a href="profile-user.html" class="header__item header__user">daniilsergeevich200111@gmail.com</a>
-          <div class="header__nav-wrapper-list">
-            <div class="header__nav-list">
-              <a href="main.html" class="header__item header__item--active">Главная</a>
-              <a href="news.html" class="header__item">Новости</a>
-              <a href="content.html" class="header__item">Достопримечательности</a>
-              <div class="main__search-wrapper">
-                <input class="main__search-fild" id="searchHeader" name="search_bar" placeholder="Поиск..." />
-                <button class="main__search-icon" name="search">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="11" cy="11" r="7" stroke="black" stroke-width="2" />
-                    <path d="M20 20L17 17" stroke="black" stroke-width="2" stroke-linecap="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <a href="login.html" class="header__btn-sign">Войти</a>
-          </div>
-        </nav>
-      </div>
-    </header>
+<?php
+require ('./header-block.php');
+require ('./header.php');
+?>
+
     <div class="container">
       <div class="profile__wrapper">
         <section class="profile profile-menu">
           <div class="profile-menu__item">
             <div class="profile-menu__item-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M19.7274 20.4471C19.2716 19.1713 18.2672 18.0439 16.8701 17.2399C15.4729 16.4358 13.7611 16 12 16C10.2389 16 8.52706 16.4358 7.12991 17.2399C5.73276 18.0439 4.72839 19.1713 4.27259 20.4471"
                   stroke="black"
                   stroke-width="2"
                   stroke-linecap="round"
                 />
-                <circle cx="12" cy="8" r="4" stroke="black" stroke-width="2" stroke-linecap="round" />
+                <circle
+                  cx="12"
+                  cy="8"
+                  r="4"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
               </svg>
             </div>
-            <a href="profile-user.html" class="profile-menu__item-link">Профиль</a>
+            <a href="/dist/profile-user.php" class="profile-menu__item-link"
+              >Профиль</a
+            >
           </div>
           <div class="profile-menu__item">
             <div class="profile-menu__item-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M12 4V4C8.22876 4 6.34315 4 5.17157 5.17157C4 6.34315 4 8.22876 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C15.7712 20 17.6569 20 18.8284 18.8284C20 17.6569 20 15.7712 20 12V12"
                   stroke="black"
                   stroke-width="2"
                 />
-                <path d="M9 10L15 10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M9 14H12" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M9 10L15 10"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 14H12"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
                 <path
                   d="M19 8L19 2M16 5H22"
                   stroke="black"
@@ -81,33 +72,90 @@
                 />
               </svg>
             </div>
-            <a href="profile-article.html" class="profile-menu__item-link">Предложить статью</a>
+            <a href="/dist/profile-article.php" class="profile-menu__item-link"
+              >Предложить статью</a
+            >
           </div>
           <div class="profile-menu__item">
             <div class="profile-menu__item-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M12.398 19.804L12.8585 20.6917L12.8585 20.6917L12.398 19.804ZM11.602 19.804L11.1415 20.6917L11.1415 20.6917L11.602 19.804ZM18 11C18 13.1458 16.9079 14.9159 15.545 16.2906C14.183 17.6644 12.6342 18.555 11.9376 18.9163L12.8585 20.6917C13.6448 20.2838 15.397 19.2805 16.9653 17.6987C18.5326 16.1178 20 13.8706 20 11H18ZM12 5C15.3137 5 18 7.68629 18 11H20C20 6.58172 16.4183 3 12 3V5ZM6 11C6 7.68629 8.68629 5 12 5V3C7.58172 3 4 6.58172 4 11H6ZM12.0624 18.9163C11.3658 18.555 9.81702 17.6644 8.45503 16.2906C7.09211 14.9159 6 13.1458 6 11H4C4 13.8706 5.46741 16.1178 7.03474 17.6987C8.60299 19.2805 10.3552 20.2838 11.1415 20.6917L12.0624 18.9163ZM11.9376 18.9163C11.9514 18.9091 11.9733 18.9023 12 18.9023C12.0267 18.9023 12.0486 18.9091 12.0624 18.9163L11.1415 20.6917C11.6831 20.9726 12.3169 20.9726 12.8585 20.6917L11.9376 18.9163ZM14 11C14 12.1046 13.1046 13 12 13V15C14.2091 15 16 13.2091 16 11H14ZM12 9C13.1046 9 14 9.89543 14 11H16C16 8.79086 14.2091 7 12 7V9ZM10 11C10 9.89543 10.8954 9 12 9V7C9.79086 7 8 8.79086 8 11H10ZM12 13C10.8954 13 10 12.1046 10 11H8C8 13.2091 9.79086 15 12 15V13Z"
                   fill="black"
                 />
               </svg>
             </div>
-            <a href="profile-attraction.html" class="profile-menu__item-link">Предложить достопримечательность</a>
+            <a href="/dist/profile-attraction.php" class="profile-menu__item-link"
+              >Предложить достопримечательность</a
+            >
           </div>
-          <div class="profile-menu__item">
+          <?if ($_SESSION['role'] == 'admin')
+              {
+                echo  '<div class="profile-menu__item">
+                <div class="profile-menu__item-icon">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M8 10L8 16"
+                      stroke="black"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M12 12V16"
+                      stroke="black"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16 8V16"
+                      stroke="black"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <rect
+                      x="3"
+                      y="4"
+                      width="18"
+                      height="16"
+                      rx="2"
+                      stroke="black"
+                      stroke-width="2"
+                    />
+                  </svg>
+                </div>
+                <a
+                  href="php/pages/admin-panel.php"
+                  class="profile-menu__item-link"
+                  >Панель администратора</a
+                >
+              </div>';
+              } 
+              ?>
+         
+         <div class="profile-menu__item">
             <div class="profile-menu__item-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 10L8 16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M12 12V16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M16 8V16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <rect x="3" y="4" width="18" height="16" rx="2" stroke="black" stroke-width="2" />
-              </svg>
-            </div>
-            <a href="admin-panel.html" class="profile-menu__item-link">Панель администратора</a>
-          </div>
-          <div class="profile-menu__item">
-            <div class="profile-menu__item-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M2 12L1.21913 11.3753L0.719375 12L1.21913 12.6247L2 12ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM5.21913 6.3753L1.21913 11.3753L2.78087 12.6247L6.78087 7.6247L5.21913 6.3753ZM1.21913 12.6247L5.21913 17.6247L6.78087 16.3753L2.78087 11.3753L1.21913 12.6247ZM2 13H11V11H2V13Z"
                   fill="black"
@@ -118,7 +166,9 @@
                 />
               </svg>
             </div>
-            <a href="main.html" class="profile-menu__item-link">Выйти</a>
+            <a href="/dist/php/pages/loginPage.php" class="profile-menu__item-link">Выйти
+              <??>
+            </a>
           </div>
         </section>
         <section class="profile profile-article">
@@ -127,7 +177,13 @@
             <div class="profile-article__wrapper">
               <div class="profile__img-wrapper">
                 <div class="profile__img-icon">
-                  <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="120"
+                    height="120"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       fill-rule="evenodd"
                       clip-rule="evenodd"
@@ -143,10 +199,18 @@
                   </svg>
                 </div>
                 <h5 class="profile__img-title">Добавить фотографию</h5>
+                <input type="file" multiple accept="image/png"/>
               </div>
               <div class="profile__items">
-                <div class="profile__item"><input class="profile__item-input" placeholder="Заголовок статьи" /></div>
-                <div class="profile__item"><input class="profile__item-input" placeholder="Описание" /></div>
+                <div class="profile__item">
+                  <input
+                    class="profile__item-input"
+                    placeholder="Заголовок статьи"
+                  />
+                </div>
+                <div class="profile__item">
+                  <input class="profile__item-input" placeholder="Описание" />
+                </div>
                 <a href="#" class="profile__btn">Предложить статью</a>
               </div>
             </div>
@@ -154,61 +218,4 @@
         </section>
       </div>
     </div>
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__wrapper">
-          <div class="footer__wrapper-inner">
-            <div class="footer__title">Достопримечательности Витебской области</div>
-            <div class="main__search-wrapper">
-              <input class="main__search-fild" id="searchFooter" name="search_bar" placeholder="Поиск..." />
-              <button class="main__search-icon" name="search">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="11" cy="11" r="7" stroke="black" stroke-width="2" />
-                  <path d="M20 20L17 17" stroke="black" stroke-width="2" stroke-linecap="round" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="footer__wrapper-inner">
-            <div class="footer__list-wrapper">
-              <a href="content.html" class="footer__list-title">Достопримечательности</a>
-              <div class="footer__items">
-                <a href="attraction.html" class="footer__item">Три штыка</a>
-                <a href="attraction.html" class="footer__item">Памятник Князю Альгерду</a>
-                <a href="attraction.html" class="footer__item">Памятник Воинам-интернационалистам</a>
-                <a href="attraction.html" class="footer__item">Три штыка</a>
-              </div>
-            </div>
-            <div class="footer__list-wrapper">
-              <a href="#" class="footer__list-title">Категории</a>
-              <div class="footer__items">
-                <a href="#" class="footer__item">Памятники</a> <a href="#" class="footer__item">Исторический объект</a>
-                <a href="#" class="footer__item">Культурный объект</a>
-              </div>
-            </div>
-            <div class="footer__list-wrapper">
-              <a href="news.html" class="footer__list-title">Новости</a>
-              <div class="footer__items">
-                <a href="paragraph.html" class="footer__item">Чернобыльская зона: осколки памяти</a>
-                <a href="paragraph.html" class="footer__item">"Синий" дом снова синий</a>
-                <a href="paragraph.html" class="footer__item">Супер крутая и полезная статья</a>
-              </div>
-            </div>
-            <div class="footer__list-wrapper">
-              <a href="#" class="footer__list-title">Населенный пункт</a>
-              <div class="footer__items">
-                <a href="#" class="footer__item">Витебск</a> <a href="#" class="footer__item">Толочин</a>
-                <a href="#" class="footer__item">Сенно</a> <a href="#" class="footer__item">Ушачи</a>
-              </div>
-            </div>
-          </div>
-          <div class="footer__wrapper-inner footer__wrapper-inner--license">
-            <div class="footer__copyright">© Все права защищены автором</div>
-            <div class="footer__copyright-date">2022</div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <script src="/js/main.min.js"></script>
-  </body>
-</html>
+    <?require('./footer-block.php')?>

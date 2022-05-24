@@ -1,7 +1,12 @@
 <?
 session_start();
+if(isset($_SESSION)){
+  session_destroy();
+}
 require("../scripts/connect.php");
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +14,7 @@ require("../scripts/connect.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/style.css" />
-    <link rel="icon" href="../icon/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="/dist/favicon/favicon.ico" type="image/x-icon"/>
     <title>Login</title>
   </head>
   <body></body>
@@ -53,7 +58,7 @@ require("../scripts/connect.php");
             Введите адрес электронной почты и пароль ниже
           </div>
         </div>
-        <form action="../scripts/login.php" method="get">
+        <form action="../scripts/login.php" method="POST">
         <div class="login__input-wrapper">
           <div class="login__input-wrapper-inner">
             <div class="login__input-name">Эл. почта</div>
@@ -72,11 +77,14 @@ require("../scripts/connect.php");
             <input type="password" class="login__input" placeholder="Пароль" name="password"/>
           </div>
           <div class="login__input-wrapper-inner">
-          <a href="../pages/admin-panel.php">
-              <button type="submit" class="btn" name="submit">
-                    <span class="btn-text">Войти</span>
-              </button>
-            </a >
+            <a href="../scripts/login.php">
+                <button type="submit" class="btn" name="submit">
+                      <span class="btn-text">Войти</span>
+                </button>
+              </a >
+              <a href="/dist/index.php" class="btn-index">
+                На главную
+              </a >
           </div>
         </div>
         </form>

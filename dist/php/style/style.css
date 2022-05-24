@@ -1,18 +1,13 @@
 @font-face {
-  font-family: Comfortaa;
-  font-stretch: normal;
-  font-style: normal;
-  font-weight: 400;
-  src: url(Comfortaa\ Regular.eot);
-  src: url(Comfortaa\ Regular.eot?#iefix) format("embedded-opentype"),
-    url(Comfortaa\ Regular.woff2) format("woff2"),
-    url(Comfortaa\ Regular.woff) format("woff"),
-    url("Comfortaa Regular.svg#Comfortaa Regular") format("svg");
-  unicode-range: U+0020-2074;
+  font-family: RobotoFlex;
+  src: url(RobotoFlex-Regular.ttf) format("ttf");
+}
+* {
+  font-family: RobotoFlex, sans-serif;
+  font-weight: 500;
 }
 :root {
   --fontWieght-bold: 900;
-  --fontFamily-comforta: Comfortaa;
   --background-default: #f7f8fc;
   --background-data: #cecece;
   --border-radius: 8px;
@@ -33,7 +28,6 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: var(--body-bg);
   color: var(--body-color);
-  font-family: var(--fontFamily-comforta);
   font-size: var(--body-font-size);
   font-weight: var(--body-font-weight);
   line-height: var(--body-line-height);
@@ -449,7 +443,6 @@ body {
 .login {
   align-items: center;
   display: flex;
-  font-family: var(--fontFamily-comforta);
   min-height: 100vh;
 }
 .login__wrapper {
@@ -547,7 +540,6 @@ body {
   font-size: 12px;
 }
 .admin-panel {
-  font-family: var(--fontFamily-comforta);
   overflow-y: none;
 }
 .admin-panel__container {
@@ -626,6 +618,7 @@ body {
   }
 }
 .admin-panel__data-container {
+  flex-direction: column;
   background-color: var(--background-default);
   border: 1px solid #dfe0eb;
   border-radius: var(--border-radius);
@@ -635,14 +628,15 @@ body {
 }
 .admin-panel__data-items-wrapper {
   max-height: 350px;
+  overflow: auto;
   position: relative;
 }
-@media (max-width: 991.98px) {
+/* @media (max-width: 1280px) {
   .admin-panel__data-items-wrapper {
     overflow: visible;
     overflow-x: auto;
   }
-}
+} */
 .admin-panel__data-title-container {
   display: flex;
   flex-wrap: wrap;
@@ -743,22 +737,22 @@ body {
 }
 @media (max-width: 479.98px) {
   .admin-panel__item {
-    grid-template-columns: repeat(8, 50%);
+    grid-template-columns: repeat(10, 50%);
   }
 }
 @media (min-width: 480px) and (max-width: 767.98px) {
   .admin-panel__item {
-    grid-template-columns: repeat(8, 33%);
+    grid-template-columns: repeat(10, 33%);
   }
 }
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 768px) and (max-width: 1279.98px) {
   .admin-panel__item {
-    grid-template-columns: repeat(8, 25%);
+    grid-template-columns: repeat(10, 25%);
   }
 }
-@media (min-width: 991.98px) {
+@media (min-width: 1279.98px) {
   .admin-panel__item {
-    grid-template-columns: 15% 15% 25% 15% 10% 10% 5% 5%;
+    grid-template-columns: 13% 13% 13% 13% 10% 10% 10% 8% 5% 4%;
   }
 }
 .admin-panel__item:before {
@@ -933,4 +927,10 @@ body {
   .dashboard__link {
     font-size: 12px;
   }
+}
+
+.btn-index {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
 }

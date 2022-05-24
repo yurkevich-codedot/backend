@@ -1,6 +1,5 @@
 <?
-session_start();
-require("../scripts/connect.php");
+require('../scripts/connect.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +52,7 @@ require("../scripts/connect.php");
             Заполните адрес электронной почты и пароль ниже
           </div>
         </div>
-        <form action="../scripts/registration.php" method="post">
+        <form action="/dist/php/scripts/registration.php" method="post">
           <div class="login__input-wrapper">
             <div class="login__input-wrapper-inner">
               <div class="login__input-name">Эл. почта</div>
@@ -69,6 +68,14 @@ require("../scripts/connect.php");
                 Пароль
               </div>
               <input type="password" class="login__input" name="password" placeholder="Пароль" />
+            </div>
+            <div class="login__input-wrapper-inner">
+              <div class="login__input-name">Эл. почта</div>
+              <input
+                class="login__input"
+                placeholder="Секретное слово"
+                name="secret"
+              />
             </div>
             <div class="login__input-wrapper-inner">
             <a href="../scripts/registration.php">
