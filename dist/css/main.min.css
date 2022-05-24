@@ -2252,9 +2252,3 @@ body {
 .attraction__paragraph-discription {
   font-size: 18px;
 }
-
-.btn-index {
-  display: flex;
-  justify-content: center;
-  color: black;
-}
