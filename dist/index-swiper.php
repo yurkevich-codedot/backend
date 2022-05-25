@@ -40,7 +40,7 @@
               /></picture>
             </div>
             <div class="container">
-              <h1 class="main__title index-swiper--title">Тест</h1>
+              <h1 class="main__title index-swiper--title">Три штыка</h1>
             </div>
           </div>
           <div class="index-swiper__item swiper-slide">
@@ -53,7 +53,7 @@
               /></picture>
             </div>
             <div class="container">
-              <h1 class="main__title index-swiper--title">Князь Алгердддд</h1>
+              <h1 class="main__title index-swiper--title">Князь Ольгерд</h1>
             </div>
           </div>
         </div>

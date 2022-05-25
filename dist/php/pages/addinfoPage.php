@@ -109,6 +109,11 @@ while($users_list = mysqli_fetch_assoc($array_users))
                       }
                       echo '</select>';                   
                     }
+                    else if($item[0]=='discription')
+                    {
+                      echo '<div class="login__input-name">'.$item[0].'</div>
+                      <textarea cols="40" rows="10" class="login__input" name="'.$item[0].'" value="" placeholder="'.$item[0].'" wrap="soft"></textarea>';          
+                    }
                     else{
                       echo '<div class="login__input-name">'.$item[0].'</div>
                       <input class="login__input" name="'.$item[0].'" value="'.$cur_data[0].'" placeholder="'.$item[0].'"/>';

@@ -49,15 +49,23 @@ require ('./header.php');
               {
                   if($title[1]==$item[3])
                   {
+                    $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$item[0]/main.png";
+                    $file_exists = file_exists($file);
                     echo '
-                      <div class="content__item swiper-slide">
+                      <div class="content__item swiper-slide">';
+                      if($file_exists)
+                      {
+                        echo'
                           <div class="main__img-wrapper">
                             <img
-                              src="./img/uploads/three-shtika.png"
+                              src="./img/uploads/attractions/'.$item[0].'/main.png"
                               class="main__img"
                               alt="'.$item[0].'"
                             />
                           </div>
+                          ';
+                      }
+                          echo'
                           <div class="content__name-wrapper">
                             <div class="content__name">'.$item[1].'</div>
                             <div class="content__name">'.$item[2].'</div>

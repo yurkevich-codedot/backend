@@ -29,19 +29,19 @@ require ('./header.php');
         <div class="news__items-wrapper">
           <div class="news__items">
             <?
-            $sql = mysqli_query($mysqli,"SELECT * FROM `news`");
+            $sql = mysqli_query($mysqli,"SELECT * FROM `news` ORDER BY `news`.`id` DESC");
             $info = mysqli_fetch_all($sql);
             foreach($info as $item)
             {
               echo '
               <div class="news__item">
-              <a href="/dist/paragraph.php?id='.$item[0].'" class="news__img-wrapper" ><img
+              <a href="/dist/paragraph.php?id='.$item[0].'" class="news__img-wrapper" title="'.$item[1].'"><img
                   src="./img/uploads/knjaz-algerd.png"
                   class="news__img"
                   alt="'.$item[0].'"
               /></a>
               <div class="news__name-wrapper">
-                <a href="/dist/paragraph.php?id='.$item[0].'" class="news__name" >'.$item[1].'</a>
+                <a href="/dist/paragraph.php?id='.$item[0].'" class="news__name" title="'.$item[1].'">'.$item[1].'</a>
                 <div class="news__discription">
                   '.$item[2].'
                 </div>

@@ -46,7 +46,9 @@ $info = mysqli_fetch_all($sql);
           {
             echo '<div class="paragraph__item">
             <div class="paragraph__content">
-              <div class="attraction__paragraph-discription">'.$item[2].'</div>
+              <div class="attraction__paragraph-discription">
+              <pre>'.$item[2].'</pre>
+              </div>
             </div>
             <div class="main__img-container">
               <div class="main__img-wrapper">

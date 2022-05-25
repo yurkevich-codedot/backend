@@ -9,12 +9,19 @@ $attractions = mysqli_fetch_all($sql);
 ?>
 
     <section class="background">
+      <?
+       $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$id/main.png";
+       $file_exists = file_exists($file);
+       if($file_exists)
+       {
+      echo '
       <picture
         ><img
-          src="./img/uploads/background.png"
+          src="./img/uploads/attractions/'.$id.'/main.png"
           class="background__img"
           alt="background"
-      /></picture>
+      /></picture>';}
+      ?>
       <div class="container">
         <div class="content__discription-wrapper">
           <div class="main__navigation">
@@ -106,36 +113,34 @@ $attractions = mysqli_fetch_all($sql);
                 </div>
               </div>
               <div class="attraction__item-discription">
-              '.$item[8].'
+              <pre>'.$item[8].'<pre>
               </div> ';             
             }
               ?>
             </div>
             <div class="main__img-container">
-              <div class="main__img-wrapper">
-                <picture class="main__img-inner"
-                  ><img
-                    src="./img/uploads/vitebsk.png"
-                    class="main__img"
-                    alt="lol"
-                /></picture>
-              </div>
-              <div class="main__img-wrapper">
-                <picture class="main__img-inner"
-                  ><img
-                    src="./img/uploads/vitebsk.png"
-                    class="main__img"
-                    alt="lol"
-                /></picture>
-              </div>
-              <div class="main__img-wrapper">
-                <picture class="main__img-inner"
-                  ><img
-                    src="./img/uploads/vitebsk.png"
-                    class="main__img"
-                    alt="lol"
-                /></picture>
-              </div>
+              <?
+              $counter = 1;
+              do
+              {
+                $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$id/$counter.png";
+                $file_exists = file_exists($file);
+                if($file_exists)
+                {
+                  echo '
+                  <div class="main__img-wrapper">
+                    <picture class="main__img-inner"
+                      ><img
+                        src="./img/uploads/attractions/'.$id.'/'.$counter.'.png"
+                        class="main__img"
+                        alt="lol"
+                    /></picture>
+                  </div>';
+                  $counter++;
+                }
+              }
+              while($file_exists);
+              ?>
             </div>
           </div>
         </div>
