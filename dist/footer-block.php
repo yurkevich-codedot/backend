@@ -1,3 +1,10 @@
+<?
+require("php/scripts/connect.php");
+$sql = mysqli_query($mysqli,"SELECT * FROM `news` ORDER BY `news`.`id` DESC LIMIT 4");
+$news = mysqli_fetch_all($sql);
+
+?>
+
 <footer class="footer">
       <div class="container">
         <div class="footer__wrapper">
@@ -62,17 +69,17 @@
               </div>
             </div>
             <div class="footer__list-wrapper">
-              <a href="news.html" class="footer__list-title">Новости</a>
+            <a href="news.html" class="footer__list-title">Новости</a>
               <div class="footer__items">
-                <a href="paragraph.html" class="footer__item"
-                  >Чернобыльская зона: осколки памяти</a
-                >
-                <a href="paragraph.html" class="footer__item"
-                  >"Синий" дом снова синий</a
-                >
-                <a href="paragraph.html" class="footer__item"
-                  >Супер крутая и полезная статья</a
-                >
+              <? 
+              foreach($news as $item)
+              {
+              echo'
+            
+                <a href="paragraph.php?id='.$item[0].'" class="footer__item"
+                  >'.$item[1].'</a
+                >';}
+                ?>
               </div>
             </div>
             <div class="footer__list-wrapper">

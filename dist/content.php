@@ -1,6 +1,7 @@
 <?php
 require ('./header-block.php');
 require ('./header.php');
+
 ?>
     <section class="background">
       <picture
@@ -79,8 +80,8 @@ require ('./header.php');
                 }
                 echo'
                   <div class="swiper-pagination"></div>
-                  <!--<div class="prev"></div>--!>
-                  <!--<div class="next"></div>--!>
+                  <div class="prev"></div>
+                  <div class="next"></div>
                   <div class="swiper-scrollbar"></div>
                   </div>
                 ';

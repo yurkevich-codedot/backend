@@ -15,35 +15,45 @@ require ('./header.php');
               /></picture>
             </div>
             <div class="container">
+              <div class="index-swiper__background">
               <h1 class="main__title index-swiper--title">
                 Достопримечательности Витебской области
               </h1>
+              </div>
             </div>
           </div>
           <div class="index-swiper__item swiper-slide">
             <div class="index-swiper__img-wrapper">
               <picture
                 ><img
-                  src="./img/uploads/vitebsk.png"
+                  src="./img/uploads/background.png"
                   class="background__img"
                   alt="background"
               /></picture>
             </div>
             <div class="container">
-              <h1 class="main__title index-swiper--title">Три штыка</h1>
+              <div class="index-swiper__background">
+              <h1 class="main__title index-swiper--title">
+               Слайд 2
+              </h1>
+              </div>
             </div>
           </div>
           <div class="index-swiper__item swiper-slide">
             <div class="index-swiper__img-wrapper">
               <picture
                 ><img
-                  src="./img/uploads/knjaz-algerd.png"
+                  src="./img/uploads/background.png"
                   class="background__img"
                   alt="background"
               /></picture>
             </div>
             <div class="container">
-              <h1 class="main__title index-swiper--title">Князь Ольгерд</h1>
+              <div class="index-swiper__background">
+              <h1 class="main__title index-swiper--title">
+                Слайд 3
+              </h1>
+              </div>
             </div>
           </div>
         </div>

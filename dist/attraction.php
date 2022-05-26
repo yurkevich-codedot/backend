@@ -21,6 +21,15 @@ $attractions = mysqli_fetch_all($sql);
           class="background__img"
           alt="background"
       /></picture>';}
+      else
+      {
+        echo '<picture
+        ><img
+          src="./img/uploads/background.png"
+          class="background__img"
+          alt="background"
+      /></picture>';
+      }
       ?>
       <div class="container">
         <div class="content__discription-wrapper">
@@ -38,6 +47,70 @@ $attractions = mysqli_fetch_all($sql);
             <h1 class="main__title">'.$item[1].'</h1>
           </div>';
             }
+            foreach ($attractionsView as $item)
+            {
+            echo '
+            <div class="attraction__info"><p class="attraction__item-info">Категория:'.$item[3].'</p>
+            <p class="attraction__item-info">Тип:'.$item[2].'</p>
+            <div class="attraction__rating">
+              <div class="attraction__rating-title">Оценить:</div>
+              <div class="attraction__rating-simple">
+                <div class="attraction__rating-simple__items">
+                  <input
+                    type="radio"
+                    class="attraction__rating-simple__item"
+                    id="rating_5"
+                    value="5"
+                  />
+                  <label
+                    for="rating_5"
+                    class="attraction__rating-simple__label"
+                  ></label>
+                  <input
+                    type="radio"
+                    class="attraction__rating-simple__item"
+                    id="rating_4"
+                    value="4"
+                  />
+                  <label
+                    for="rating_4"
+                    class="attraction__rating-simple__label"
+                  ></label>
+                  <input
+                    type="radio"
+                    class="attraction__rating-simple__item"
+                    id="rating_3"
+                    value="3"
+                  />
+                  <label
+                    for="rating_3"
+                    class="attraction__rating-simple__label"
+                  ></label>
+                  <input
+                    type="radio"
+                    class="attraction__rating-simple__item"
+                    id="rating_2"
+                    value="2"
+                  />
+                  <label
+                    for="rating_2"
+                    class="attraction__rating-simple__label"
+                  ></label>
+                  <input
+                    type="radio"
+                    class="attraction__rating-simple__item"
+                    id="rating_1"
+                    value="1"
+                  />
+                  <label
+                    for="rating_1"
+                    class="attraction__rating-simple__label"
+                  ></label>
+                </div>
+              </div>
+            </div></div>'
+            ;
+            }
           ?>
         </div>
       </div>
@@ -53,72 +126,16 @@ $attractions = mysqli_fetch_all($sql);
               foreach($attractionsView as $item)
               {
                 echo '
-              <p class="attraction__item-info">Категория:'.$item[3].'</p>
-              <p class="attraction__item-info">Тип:'.$item[2].'</p>
-              <div class="attraction__rating">
-                <div class="attraction__rating-title">Оценить:</div>
-                <div class="attraction__rating-simple">
-                  <div class="attraction__rating-simple__items">
-                    <input
-                      type="radio"
-                      class="attraction__rating-simple__item"
-                      id="rating_5"
-                      value="5"
-                    />
-                    <label
-                      for="rating_5"
-                      class="attraction__rating-simple__label"
-                    ></label>
-                    <input
-                      type="radio"
-                      class="attraction__rating-simple__item"
-                      id="rating_4"
-                      value="4"
-                    />
-                    <label
-                      for="rating_4"
-                      class="attraction__rating-simple__label"
-                    ></label>
-                    <input
-                      type="radio"
-                      class="attraction__rating-simple__item"
-                      id="rating_3"
-                      value="3"
-                    />
-                    <label
-                      for="rating_3"
-                      class="attraction__rating-simple__label"
-                    ></label>
-                    <input
-                      type="radio"
-                      class="attraction__rating-simple__item"
-                      id="rating_2"
-                      value="2"
-                    />
-                    <label
-                      for="rating_2"
-                      class="attraction__rating-simple__label"
-                    ></label>
-                    <input
-                      type="radio"
-                      class="attraction__rating-simple__item"
-                      id="rating_1"
-                      value="1"
-                    />
-                    <label
-                      for="rating_1"
-                      class="attraction__rating-simple__label"
-                    ></label>
-                  </div>
-                </div>
-              </div>
+              
               <div class="attraction__item-discription">
-              <pre>'.$item[8].'<pre>
+              <pre>     '.$item[8].'<pre>
               </div> ';             
             }
               ?>
             </div>
-            <div class="main__img-container">
+  
+            <div class="main__img-container infoswiper">
+            <div class="swiper-wrapper swiper-flex">
               <?
               $counter = 1;
               do
@@ -128,6 +145,7 @@ $attractions = mysqli_fetch_all($sql);
                 if($file_exists)
                 {
                   echo '
+                  <div class="content__item swiper-slide">
                   <div class="main__img-wrapper">
                     <picture class="main__img-inner"
                       ><img
@@ -135,16 +153,23 @@ $attractions = mysqli_fetch_all($sql);
                         class="main__img"
                         alt="lol"
                     /></picture>
-                  </div>';
+                  </div>
+                  </div>'
+                  ;
                   $counter++;
                 }
               }
               while($file_exists);
               ?>
             </div>
-          </div>
+            <div class="swiper-pagination"></div>
+              <div class="prev"></div>
+              <div class="next"></div>
+              <div class="swiper-scrollbar"></div>
+        </div>
         </div>
       </div>
+      <!-- </div> -->
     </section>
     <section class="map">
       <div class="container">

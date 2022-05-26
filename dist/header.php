@@ -20,7 +20,7 @@
               <a href="/dist/index.php" class="header__item header__item--active"
                 >Главная</a
               >
-              <a href="/dist/news.php" class="header__item">Новости</a>
+              <a href="/dist/news.php?page=1" class="header__item">Новости</a>
               <a href="/dist/content.php" class="header__item"
                 >Достопримечательности</a
               >
