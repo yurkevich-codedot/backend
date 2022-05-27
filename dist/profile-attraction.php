@@ -211,16 +211,21 @@ require ('./header.php');
                   />
                 </div>
                 <div class="profile__item">
-                  <input class="profile__item-input" placeholder="Описание" />
+                  <textarea class="profile__item-input article" placeholder="Описание"></textarea>
                 </div>
                 <div class="profile__item">
                   <select class="profile__item-input">
-                    <option value="" disabled="disabled" selected="selected">
+                  <option value="" disabled="disabled" selected="selected">
                       Категория
                     </option>
-                    <option value="История">История</option>
-                    <option value="Культура">Культура</option>
-                    <option value="Военное">Военное</option>
+                    <?
+                    $sql = mysqli_query($mysqli,"SELECT * FROM `categories`");
+                    $categories = mysqli_fetch_all($sql);
+                    foreach( $categories as $item)
+                    {
+                      echo '<option value="'.$item[1].'">'.$item[1].'</option>';
+                    }
+                    ?>
                   </select>
                 </div>
                 <div class="profile__item">
@@ -228,9 +233,14 @@ require ('./header.php');
                     <option value="" disabled="disabled" selected="selected">
                       Населенный пункт
                     </option>
-                    <option value="Толочин">Толочин</option>
-                    <option value="Сенно">Сенно</option>
-                    <option value="Новый двор">Новый двор</option>
+                    <?
+                    $sql = mysqli_query($mysqli,"SELECT * FROM `locality`");
+                    $locality = mysqli_fetch_all($sql);
+                    foreach( $locality as $item)
+                    {
+                      echo '<option value="'.$item[1].'">'.$item[1].'</option>';
+                    }
+                    ?>
                   </select>
                 </div>
                 <div class="profile__item">
@@ -238,9 +248,14 @@ require ('./header.php');
                     <option value="" disabled="disabled" selected="selected">
                       Тип
                     </option>
-                    <option value="История">Памятник</option>
-                    <option value="Культура">Музей</option>
-                    <option value="Военное">Мост</option>
+                    <?
+                    $sql = mysqli_query($mysqli,"SELECT * FROM `type`");
+                    $type = mysqli_fetch_all($sql);
+                    foreach( $type as $item)
+                    {
+                      echo '<option value="'.$item[1].'">'.$item[1].'</option>';
+                    }
+                    ?>
                   </select>
                 </div>
                 <a href="#" class="profile__btn"

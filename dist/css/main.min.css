@@ -2061,16 +2061,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-}
-@media (max-width: 1279.98px) {
-  .profile__img-wrapper {
-    height: 100%;
-  }
-}
-@media (min-width: 1280px) {
-  .profile__img-wrapper {
-    height: 450px;
-  }
+  height: 100%;
 }
 .profile__btn,
 .profile__img-title {
@@ -2352,4 +2343,8 @@ pre {
   .main__prompt-items.showList {
     max-height: 180px;
   }
+}
+
+.profile__item-input.article {
+  height: 315px;
 }

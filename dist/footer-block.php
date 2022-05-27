@@ -18,37 +18,6 @@ $attarction = mysqli_fetch_all($sqlAttraction);
             <div class="footer__title">
               Достопримечательности Витебской области
             </div>
-            <div class="main__search-wrapper">
-              <input
-                class="main__search-fild"
-                id="searchFooter"
-                name="search_bar"
-                placeholder="Поиск..."
-              />
-              <button class="main__search-icon" name="search">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="11"
-                    cy="11"
-                    r="7"
-                    stroke="black"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M20 20L17 17"
-                    stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </button>
-            </div>
           </div>
           <div class="footer__wrapper-inner">
           <div class="footer__list-wrapper">
@@ -92,6 +61,10 @@ $attarction = mysqli_fetch_all($sqlAttraction);
           </div>
           <div class="footer__wrapper-inner footer__wrapper-inner--license">
             <div class="footer__copyright">© Все права защищены автором</div>
+            <div class="footer__links-wrapper">
+              <div class="footer__links">
+              </div>
+            </div>
             <div class="footer__copyright-date">2022</div>
           </div>
         </div>

@@ -209,7 +209,7 @@ require ('./header.php');
                   />
                 </div>
                 <div class="profile__item">
-                  <input class="profile__item-input" placeholder="Описание" />
+                <textarea class="profile__item-input article" placeholder="Описание"></textarea>
                 </div>
                 <a href="#" class="profile__btn">Предложить статью</a>
               </div>
