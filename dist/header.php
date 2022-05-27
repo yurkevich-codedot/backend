@@ -1,3 +1,20 @@
+
+<?
+require_once("php/scripts/connect.php");
+if(isset($_POST['btn-search']))
+{
+  $search = $_POST['search'];
+  $query = mysqli_query($mysqli, "SELECT * FROM attraction WHERE name like '%$search%'");
+  $queryInfo = mysqli_fetch_all($query);
+    foreach($queryInfo as $item)
+    {
+      $id = $item[0];
+      echo "<script>window.location.href = 'attraction.php?id=$id'</script>";
+      break;
+    }
+  }
+  ;?>
+
 <header class="header" id="myHeader">
     <div class="header__wrapper">
         <a href="/dist/index.php" class="header__title">Достопримечательности Витебской области</a>
@@ -24,14 +41,25 @@
               <a href="/dist/content.php" class="header__item"
                 >Достопримечательности</a
               >
-              <div class="main__search-wrapper">
+              <form method="POST" action="header.php" class="main__search-wrapper">
                 <input
+                  type="search"
                   class="main__search-fild"
-                  id="searchHeader"
-                  name="search_bar"
-                  placeholder="Поиск..."
+                  id="search"
+                  name="search"
+                  placeholder="Поиск..."autocomplete="off"
                 />
-                <button class="main__search-icon" name="search">
+                  <ul class="main__prompt-items">
+                    <?
+                      $attraction = mysqli_query($mysqli, "SELECT * FROM `attraction`");
+                      $attractions = mysqli_fetch_all($attraction);
+                    foreach($attractions as $item)
+                    {
+                      echo '<a href="attraction.php?id='.$item[0].'" class="main__prompt-item">'.$item[1].'</a>';
+                    }
+                    ?>
+                  </ul>
+                <button class="main__search-icon" name="btn-search">
                   <svg
                     width="24"
                     height="24"
@@ -54,7 +82,7 @@
                     />
                   </svg>
                 </button>
-              </div>
+              </form>
             </div>
             <?
             if(!isset($_SESSION['email']))

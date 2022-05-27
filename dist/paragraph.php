@@ -75,7 +75,7 @@ $info = mysqli_fetch_all($sql);
             echo '<div class="paragraph__item">
             <div class="paragraph__content">
               <div class="attraction__paragraph-discription">
-              <pre>    '.$item[2].'</pre>
+              <pre>'.$item[2].'</pre>
               </div>';
           }
               ?>
@@ -105,12 +105,11 @@ $info = mysqli_fetch_all($sql);
             while($file_exists);
               ?>
               </div>
-                 <div class="swiper-pagination"></div>
-              <div class="prev"></div>
-              <div class="next"></div>
-              <div class="swiper-scrollbar"></div>
-            </div>
-         
+                <div class="swiper-pagination"></div>
+                <div class="prev"></div>
+                <div class="next"></div>
+                <div class="swiper-scrollbar"></div>
+              </div>
           </div>
         </div>
       </div>

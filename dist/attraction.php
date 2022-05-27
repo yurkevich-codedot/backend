@@ -50,8 +50,10 @@ $attractions = mysqli_fetch_all($sql);
             foreach ($attractionsView as $item)
             {
             echo '
-            <div class="attraction__info"><p class="attraction__item-info">Категория:'.$item[3].'</p>
-            <p class="attraction__item-info">Тип:'.$item[2].'</p>
+            <div class="attraction__info">
+            <p class="attraction__item-info">Категория: '.$item[3].'</p>
+            <p class="attraction__item-info">Тип: '.$item[2].'</p>
+            <p class="attraction__item-info">Адрес: '.$item[4].'</p>
             <div class="attraction__rating">
               <div class="attraction__rating-title">Оценить:</div>
               <div class="attraction__rating-simple">
@@ -108,7 +110,8 @@ $attractions = mysqli_fetch_all($sql);
                   ></label>
                 </div>
               </div>
-            </div></div>'
+            </div>
+            </div>'
             ;
             }
           ?>
@@ -128,7 +131,7 @@ $attractions = mysqli_fetch_all($sql);
                 echo '
               
               <div class="attraction__item-discription">
-              <pre>     '.$item[8].'<pre>
+              <pre>'.$item[8].'<pre>
               </div> ';             
             }
               ?>
