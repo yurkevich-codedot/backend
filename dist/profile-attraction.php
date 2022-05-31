@@ -280,25 +280,52 @@ $root_directory = dirname( __FILE__ );
     </div>
     <script>
       let img__wrapper = document.querySelector(".profile__img-items")
+
+
       function showMyImage(input)
       {
-        let files = input.files;
-        let reader = new FileReader();
-        for(let file in files)
+        let file = input.files || input.currentTarget.files;
+        let reader = [];
+        let name;
+        for(let i in file)
         {
-          reader.readAsDataURL(file);
-          reader.onload = function ()
+          if(file.hasOwnProperty(i))
           {
-            let img__inner = document.createElement("div");
-            img__inner.classList.add("profile__img-inner");
-            img__wrapper.appendChild(img__inner);
-            let img = document.createElement("img");
-            img__inner.appendChild(img);
-            img.classList.add("img3");
-            img.src = reader.result;
+            reader[i] =  new FileReader();
+            reader[i].readAsDataURL(input.files[i]);
+            (function () 
+            {
+              reader[i].onload = function(e)
+              {
+                let img__inner = document.createElement("div");
+                img__inner.classList.add("profile__img-inner");
+                img__inner.id = i;
+
+                let dlt_btn = document.createElement("div");
+                dlt_btn.classList.add("profile__delete-btn");
+                dlt_btn.id = i;
+                img__inner.appendChild(dlt_btn);
+                img__wrapper.appendChild(img__inner);
+
+                let img = document.createElement("img");
+                img__inner.appendChild(img);
+                img.classList.add("img3");
+                img.src = e.target.result;
+                document.getElementById(i).onclick = removeElement;
+
+                function removeElement() {
+                  if(img__inner.id = dlt_btn.id)
+                  {
+                    document.getElementById(img__inner.id).remove();
+                  }
+                 }
+              }
+            })();
           }
         }
       }
+
+
 
     </script>
     <?require('./footer-block.php')?>

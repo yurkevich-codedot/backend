@@ -54,67 +54,24 @@ $attractions = mysqli_fetch_all($sql);
             <p class="attraction__item-info">Категория: '.$item[3].'</p>
             <p class="attraction__item-info">Тип: '.$item[2].'</p>
             <p class="attraction__item-info">Адрес: '.$item[4].'</p>
-            <div class="attraction__rating">
-              <div class="attraction__rating-title">Оценить:</div>
-              <div class="attraction__rating-simple">
-                <div class="attraction__rating-simple__items">
-                  <input
-                    type="radio"
-                    class="attraction__rating-simple__item"
-                    id="rating_5"
-                    value="5"
-                  />
-                  <label
-                    for="rating_5"
-                    class="attraction__rating-simple__label"
-                  ></label>
-                  <input
-                    type="radio"
-                    class="attraction__rating-simple__item"
-                    id="rating_4"
-                    value="4"
-                  />
-                  <label
-                    for="rating_4"
-                    class="attraction__rating-simple__label"
-                  ></label>
-                  <input
-                    type="radio"
-                    class="attraction__rating-simple__item"
-                    id="rating_3"
-                    value="3"
-                  />
-                  <label
-                    for="rating_3"
-                    class="attraction__rating-simple__label"
-                  ></label>
-                  <input
-                    type="radio"
-                    class="attraction__rating-simple__item"
-                    id="rating_2"
-                    value="2"
-                  />
-                  <label
-                    for="rating_2"
-                    class="attraction__rating-simple__label"
-                  ></label>
-                  <input
-                    type="radio"
-                    class="attraction__rating-simple__item"
-                    id="rating_1"
-                    value="1"
-                  />
-                  <label
-                    for="rating_1"
-                    class="attraction__rating-simple__label"
-                  ></label>
-                </div>
+            </div>
+            <div class="rating rating_set">
+            <div class="rating__body">
+            <div class="rating__active"></div>
+              <div class="rating__items">
+                <input type="radio" class="rating__item" name="rating" id="1" value="1">
+                <input type="radio" class="rating__item" name="rating" id="2" value="2">
+                <input type="radio" class="rating__item" name="rating" id="3" value="3">
+                <input type="radio" class="rating__item" name="rating" id="4" value="4">
+                <input type="radio" class="rating__item" name="rating" id="5" value="5">
               </div>
             </div>
-            </div>'
+            <div class="rating__value">'.$item[9].'</div>
+          </div>'
             ;
             }
           ?>
+          
         </div>
       </div>
     </section>
@@ -182,4 +139,75 @@ $attractions = mysqli_fetch_all($sql);
         </div>
       </div>
     </section>
+    <script>
+      const ratings = document.querySelectorAll(".rating");
+      if (ratings.length > 0) {
+        initRatings();
+      }
+
+      function initRatings() {
+        let ratingActive;
+        let ratingValue;
+        for (let i = 0; i < ratings.length; i++) {
+          const rating = ratings[i];
+      
+          initRating(rating);
+        }
+
+
+    function initRating(rating) {
+      initRatingVars(rating);
+
+      setRatingActiveWidth();
+
+      if (rating.classList.contains('rating_set')){
+        setRating(rating);
+        console.log(2);
+      }
+    }
+
+    function initRatingVars(rating) {
+      ratingActive = rating.querySelector(".rating__active");
+      ratingValue = rating.querySelector(".rating__value");
+    }
+
+  function setRatingActiveWidth(i = ratingValue.innerHTML) {
+    const ratingActiveWidth = i / 0.05;
+    ratingActive.style.width = `${ratingActiveWidth}%`;
+  }
+
+  function setRating(rating)
+  {
+
+    const ratingItems = rating.querySelectorAll(".rating__item");
+    for (let i = 0; i < ratingItems.length; i++) {
+    const ratingItem = ratingItems[i];
+
+    ratingItem.addEventListener("mouseenter", function (e){
+        initRatingVars(rating);
+
+        console.log(ratingItem.value);
+        setRatingActiveWidth(ratingItem.value);
+      });
+      ratingItem.addEventListener("mouseleave", function(e){
+        setRatingActiveWidth();
+      });
+      ratingItem.addEventListener("click", function(e){
+        initRatingVars(rating);
+
+        if(rating.dataset.ajax)
+        {
+          setRatingValue(ratingItem.value, rating);
+        }
+        else
+        {
+          ratingValue.innerHTML = i + 1;
+          setRatingActiveWidth();
+        }
+      });
+    }
+  }
+}
+
+    </script>
 <?require('./footer-block.php')?>

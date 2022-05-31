@@ -171,7 +171,7 @@ require ('./header.php');
         <section class="profile profile-user">
           <div class="profile__content">
             <h3 class="profile__content-title">Профиль</h3>
-            <div class="profile-user__wrapper">
+            <form class="profile-user__wrapper">
               <label
                 ><div class="profile__item">
                   <span>Эл.почта:</span>
@@ -193,10 +193,30 @@ require ('./header.php');
                     onmouseover="this.type='text'"
                   /></div
               ></label>
-              <a href="#" class="profile__btn">Изменить</a>
-            </div>
+              <a href="#" class="profile__btn" onclick="onEdit()">Изменить</a>
+            </form>
           </div>
         </section>
       </div>
     </div>
+    <script>
+      function onEdit()
+      {
+        var link = document.querySelectorAll('form input');
+        for (var i = 0; i < link.length; i++) {
+        link[i].onclick = function(event) {	
+          event.preventDefault;
+          this.parentElement.querySelector('input').readOnly = false;
+         }
+      }
+      document.querySelector(".profile__btn").textContent = "Сохранить";
+      var inputs = document.querySelectorAll(".profile__item-input");
+      {
+        for(var i=0;i<inputs.length;i++)
+        {
+          inputs[i].classList.add("profile__btn-active");
+        }
+      }
+    }
+    </script>
     <?require('./footer-block.php')?>
