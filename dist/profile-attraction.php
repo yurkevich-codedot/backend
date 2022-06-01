@@ -300,7 +300,6 @@ $root_directory = dirname( __FILE__ );
                 let img__inner = document.createElement("div");
                 img__inner.classList.add("profile__img-inner");
                 img__inner.id = i;
-
                 let dlt_btn = document.createElement("div");
                 dlt_btn.classList.add("profile__delete-btn");
                 dlt_btn.id = i;
@@ -328,4 +327,8 @@ $root_directory = dirname( __FILE__ );
 
 
     </script>
-    <?require('./footer-block.php')?>
+   <?
+    require ('./preloader.php');
+    require('./footer-block.php');
+    ?>
+    

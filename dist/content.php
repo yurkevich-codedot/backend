@@ -2,6 +2,7 @@
 require ('./header-block.php');
 require ('./header.php');
 
+
 ?>
     <section class="background">
       <picture
@@ -24,8 +25,8 @@ require ('./header.php');
         </div>
       </div>
     </section>
-    <section class="map">
-      <div class="container">
+    <section class="map" data-barba="wrapper">
+      <div class="container" data-barba="container" data-barba-namespace="content">
         <div class="map__wrapper">
           <div class="map__title">Местонахождение на карте:</div>
           <div class="map__content" id="map"></div>
@@ -89,6 +90,10 @@ require ('./header.php');
           
           ?>
         </div>
-   </div>
+      </div>
     </section>
-    <?require('./footer-block.php')?>
+    <?
+    require ('./preloader.php');
+    require('./footer-block.php');
+    ?>
+    

@@ -114,4 +114,8 @@ $info = mysqli_fetch_all($sql);
         </div>
       </div>
     </section>
-    <?require('./footer-block.php')?>
+    <?
+    require ('./preloader.php');
+    require('./footer-block.php');
+    ?>
+    

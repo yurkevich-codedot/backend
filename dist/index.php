@@ -62,4 +62,11 @@ require ('./header.php');
         <div class="swiper-pagination"></div>
       </div>
     </section>
-    <?require('./footer-block.php')?>
+    <section class="index" data-barba="wrapper">
+      <div class="container" data-barba="container" data-barba-namespace="i"></div>
+    </section>
+    <?
+    require ('./preloader.php');
+    require('./footer-block.php');
+    ?>
+    

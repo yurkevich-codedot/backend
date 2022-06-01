@@ -12,6 +12,8 @@ else
 }
 $cur_page_num = $_GET['page'];
 $limit = 8;
+$ends_count = 1;
+$dots = false;
 $num = ($page * $limit)-$limit;
 $res_count = mysqli_query($mysqli, "SELECT COUNT(*) FROM `news` ");
 $row = mysqli_fetch_row($res_count);
@@ -41,8 +43,8 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
         </div>
       </div>
     </section>
-    <section class="news">
-      <div class="container">
+    <section class="news" data-barba="wrapper">
+      <div class="container" data-barba="container" data-barba-namespace="news ">
         <div class="news__items-wrapper">
           <div class="news__items">
             <?
@@ -76,7 +78,6 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
               }
               else
               {
-                $totalpages = 0;
                 if($cur_page_num!=1)
                 {
                   echo '<a href="?page='. ($cur_page_num - 1) .'" class="news__page-num news__page-arrow">«</a>';
@@ -86,14 +87,24 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
                   if($cur_page_num==$i)
                   {
                     echo '<a href="/dist/news.php?page='.$cur_page_num.'" class="news__page-num-active">'.$cur_page_num.'</a>';
+                    $dots = true;
                   }
                   else
                   {
-                    echo '<a href="/dist/news.php?page='.$i.'" class="news__page-num">'.$i.'</a>';
+                    $middle_count = 2;
+                    if($i <= $ends_count || ($i >= $cur_page_num - $middle_count && $i <= $cur_page_num + $middle_count) || $i >= $str_page - $ends_count)
+                    {
+                      echo '<a href="/dist/news.php?page='.$i.'" class="news__page-num">'.$i.'</a>';
+                      $dots = true;
+                    }
+                    elseif($dots)
+                    {
+                      echo '<a class="news__page-num">&hellip;</a>';
+                      $dots = false;  
+                    }
                   }
-                  $totalpages = $i;
                 }
-                if($cur_page_num+1!=$str_page)
+                if($cur_page_num+1!=$str_page && $cur_page_num && ($cur_page_num < $str_page || -1==$str_page))
                 {
                   echo '<a href="?page='. ($cur_page_num + 1) .'" class="news__page-num news__page-arrow"> »</a>';
                 }
@@ -104,4 +115,8 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
         </div>
       </div>
     </section>
-    <?require('./footer-block.php')?>
+    <?
+    require ('./preloader.php');
+    require('./footer-block.php');
+    ?>
+    

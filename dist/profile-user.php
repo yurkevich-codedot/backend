@@ -219,4 +219,8 @@ require ('./header.php');
       }
     }
     </script>
-    <?require('./footer-block.php')?>
+    <?
+    require ('./preloader.php');
+    require('./footer-block.php');
+    ?>
+    

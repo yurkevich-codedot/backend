@@ -4,8 +4,7 @@ require_once("php/scripts/connect.php");
 $search = $_POST['search'];
 if(isset($_POST['btn-search']))
 {
- 
-  $query = mysqli_query($mysqli, "SELECT * FROM attraction WHERE name like '%$search%'");
+  $query = mysqli_query($mysqli, "SELECT * FROM `attraction` WHERE name like '%$search%'");
   $queryInfo = mysqli_fetch_all($query);
     foreach($queryInfo as $item)
     {

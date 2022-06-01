@@ -11,7 +11,7 @@
   --background-default: #f7f8fc;
   --background-data: #cecece;
   --border-radius: 8px;
-  --item-text-color: #3751ff;
+  --item-text-color: #883cda;
 }
 *,
 :after,
@@ -159,7 +159,7 @@ sup {
   top: -0.5em;
 }
 a {
-  color: #0d6efd;
+  color: #883cda;
   text-decoration: underline;
 }
 a:hover {
@@ -420,15 +420,16 @@ body {
   z-index: -1;
 }
 .btn {
-  background-color: #3751ff;
+  background-color: #883cda;
   border: 0;
   width: 100%;
   border-radius: var(--border-radius);
   box-shadow: 0 4px 12px rgba(55, 81, 255, 0.24);
   padding: 11px 16px;
+  transition: background-color 0.1s linear;
 }
 .btn:hover {
-  background-color: #8695f3;
+  background-color: #883cda75;
 }
 .btn-text {
   color: #fff;
@@ -765,7 +766,7 @@ body {
   width: 100%;
 }
 .admin-panel__item:hover {
-  background-color: #d8def58f;
+  background-color: #883cda45;
 }
 .admin-panel__item:first-of-type:hover {
   background-color: transparent;

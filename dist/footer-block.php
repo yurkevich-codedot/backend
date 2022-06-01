@@ -70,6 +70,9 @@ $attarction = mysqli_fetch_all($sqlAttraction);
         </div>
       </div>
     </footer>
+      <script src="./js/preloader.js">
+
+      </script>
     <script src="./js/main.min.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-<?
+is<?
 require ('./header-block.php');
 require ('./header.php');
 $id = $_GET['id'];
@@ -55,6 +55,7 @@ $attractions = mysqli_fetch_all($sql);
             <p class="attraction__item-info">Тип: '.$item[2].'</p>
             <p class="attraction__item-info">Адрес: '.$item[4].'</p>
             </div>
+            <form class="rating_wrapper">
             <div class="rating rating_set">
             <div class="rating__body">
             <div class="rating__active"></div>
@@ -67,7 +68,8 @@ $attractions = mysqli_fetch_all($sql);
               </div>
             </div>
             <div class="rating__value">'.$item[9].'</div>
-          </div>'
+          </div>
+          <input type="submit" class="btn" value="Оценить"/></form>'
             ;
             }
           ?>
@@ -140,74 +142,78 @@ $attractions = mysqli_fetch_all($sql);
       </div>
     </section>
     <script>
-      const ratings = document.querySelectorAll(".rating");
-      if (ratings.length > 0) {
-        initRatings();
+        const ratings = document.querySelectorAll(".rating");
+        if (ratings.length > 0) {
+          initRatings();
+        }
+
+        function initRatings() {
+          let ratingActive;
+          let ratingValue;
+          for (let i = 0; i < ratings.length; i++) {
+            const rating = ratings[i];
+        
+            initRating(rating);
+          }
+
+
+          function initRating(rating) {
+            initRatingVars(rating);
+
+            setRatingActiveWidth();
+
+            if (rating.classList.contains('rating_set')){
+              setRating(rating);
+              console.log(2);
+            }
+          }
+
+          function initRatingVars(rating) {
+            ratingActive = rating.querySelector(".rating__active");
+            ratingValue = rating.querySelector(".rating__value");
+          }
+
+          function setRatingActiveWidth(i = ratingValue.innerHTML) {
+              const ratingActiveWidth = i / 0.05;
+              ratingActive.style.width = `${ratingActiveWidth}%`;
+          }
+
+          function setRating(rating)
+          {
+
+            const ratingItems = rating.querySelectorAll(".rating__item");
+            for (let i = 0; i < ratingItems.length; i++) {
+            const ratingItem = ratingItems[i];
+
+            ratingItem.addEventListener("mouseenter", function (e){
+                initRatingVars(rating);
+
+                console.log(ratingItem.value);
+                setRatingActiveWidth(ratingItem.value);
+              });
+              ratingItem.addEventListener("mouseleave", function(e){
+                setRatingActiveWidth();
+              });
+              ratingItem.addEventListener("click", function(e){
+                initRatingVars(rating);
+
+                if(rating.dataset.ajax)
+                {
+                  setRatingValue(ratingItem.value, rating);
+                }
+                else
+                {
+                  ratingValue.innerHTML = i + 1;
+                  setRatingActiveWidth();
+                }
+            });
+          }
+         }
       }
+</script>
 
-      function initRatings() {
-        let ratingActive;
-        let ratingValue;
-        for (let i = 0; i < ratings.length; i++) {
-          const rating = ratings[i];
-      
-          initRating(rating);
-        }
-
-
-    function initRating(rating) {
-      initRatingVars(rating);
-
-      setRatingActiveWidth();
-
-      if (rating.classList.contains('rating_set')){
-        setRating(rating);
-        console.log(2);
-      }
-    }
-
-    function initRatingVars(rating) {
-      ratingActive = rating.querySelector(".rating__active");
-      ratingValue = rating.querySelector(".rating__value");
-    }
-
-  function setRatingActiveWidth(i = ratingValue.innerHTML) {
-    const ratingActiveWidth = i / 0.05;
-    ratingActive.style.width = `${ratingActiveWidth}%`;
-  }
-
-  function setRating(rating)
-  {
-
-    const ratingItems = rating.querySelectorAll(".rating__item");
-    for (let i = 0; i < ratingItems.length; i++) {
-    const ratingItem = ratingItems[i];
-
-    ratingItem.addEventListener("mouseenter", function (e){
-        initRatingVars(rating);
-
-        console.log(ratingItem.value);
-        setRatingActiveWidth(ratingItem.value);
-      });
-      ratingItem.addEventListener("mouseleave", function(e){
-        setRatingActiveWidth();
-      });
-      ratingItem.addEventListener("click", function(e){
-        initRatingVars(rating);
-
-        if(rating.dataset.ajax)
-        {
-          setRatingValue(ratingItem.value, rating);
-        }
-        else
-        {
-          ratingValue.innerHTML = i + 1;
-          setRatingActiveWidth();
-        }
-      });
-    }
-  }
-}
-
-    </script>
-<?require('./footer-block.php')?>
+<?
+    require ('./preloader.php');
+    require('./footer-block.php');
+?>
+    
