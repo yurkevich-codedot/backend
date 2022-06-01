@@ -11,7 +11,7 @@ else
   $page = 1;
 }
 $cur_page_num = $_GET['page'];
-$limit = 8;
+$limit = 2;
 $ends_count = 1;
 $dots = false;
 $num = ($page * $limit)-$limit;
