@@ -177,8 +177,8 @@ require ('./header.php');
                   <span>Эл.почта:</span>
                   <input
                     class="profile__item-input"
-                    value=<?echo $_SESSION['email']?>
-                    readonly="readonly"
+                    value="<?= $_SESSION['email']?>"
+                    readonly
                   /></div
               ></label>
               <label
@@ -187,8 +187,8 @@ require ('./header.php');
                   <input
                     type="password"
                     class="profile__item-input"
-                    value=<?echo $_SESSION['password']?>
-                    readonly="readonly"
+                    value="<?echo $_SESSION['password']?>"
+                    readonly
                     onmouseout="this.type='password'"
                     onmouseover="this.type='text'"
                   /></div

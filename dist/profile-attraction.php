@@ -180,10 +180,10 @@ $root_directory = dirname( __FILE__ );
             <h3 class="profile__content-title">
               Предложить достопримечательность
             </h3>
-            <form class="profile-article__wrapper">
+            <form class="profile-article__wrapper" method="POST"  enctype="multipart/form-data" action="/dist/php/scripts/upload_photo.php">
               <div class="profile__img-container">
                 <label class="profile__img-wrapper">
-                    <form class="profile__img-inner">
+                    <div class="profile__img-inner">
                       <div class="profile__img-background">
                       <div class="profile__img-icon">
                         <svg
@@ -208,7 +208,8 @@ $root_directory = dirname( __FILE__ );
                         </svg>
                       </div> 
                     <h5 class="profile__img-title">Нажмите для добавления фотографии</h5>
-                      <input type="file" id="file" onchange="showMyImage(this)" multiple accept="image/png"/></div>
+                      <input type="file" name="pictures[]" id="file" onchange="showMyImage(this)" multiple accept="image/png"/></div>
+                    </div>
                 </label>
                 <div class="profile__images-wrapper">
                 <div class="profile__img-items">
@@ -280,7 +281,7 @@ $root_directory = dirname( __FILE__ );
     </div>
     <script>
       let img__wrapper = document.querySelector(".profile__img-items")
-
+      let index = 0;
 
       function showMyImage(input)
       {
@@ -299,10 +300,10 @@ $root_directory = dirname( __FILE__ );
               {
                 let img__inner = document.createElement("div");
                 img__inner.classList.add("profile__img-inner");
-                img__inner.id = i;
+                img__inner.id = index;
                 let dlt_btn = document.createElement("div");
                 dlt_btn.classList.add("profile__delete-btn");
-                dlt_btn.id = i;
+                dlt_btn.id = index;
                 img__inner.appendChild(dlt_btn);
                 img__wrapper.appendChild(img__inner);
 
@@ -310,10 +311,11 @@ $root_directory = dirname( __FILE__ );
                 img__inner.appendChild(img);
                 img.classList.add("img3");
                 img.src = e.target.result;
-                document.getElementById(i).onclick = removeElement;
+                document.getElementById(index).onclick = removeElement;
+                index++;
 
                 function removeElement() {
-                  if(img__inner.id = dlt_btn.id)
+                  if(img__inner.id == dlt_btn.id)
                   {
                     document.getElementById(img__inner.id).remove();
                   }

@@ -1,4 +1,4 @@
-is<?
+<?
 require ('./header-block.php');
 require ('./header.php');
 $id = $_GET['id'];

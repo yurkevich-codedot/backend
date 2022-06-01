@@ -1474,8 +1474,7 @@ body {
 
 .news__page-num {
   border: 1px solid gainsboro;
-  color: var(--color-generaly);
-  font-weight: 700;
+  color: black;
   line-height: 18px;
   padding: 10px;
   text-decoration: none;
@@ -1488,14 +1487,12 @@ body {
   line-height: 18px;
   padding: 10px;
   background-color: #883cda86;
-  color: black;
-  font-weight: 700;
+  color: white;
 }
 
 .news__pagination-btns > .news__page-num:active,
 .news__pagination-btns > .news__page-num:hover {
   color: var(--color-generaly);
-  font-weight: 700;
   line-height: 18px;
 }
 
