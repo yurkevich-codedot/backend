@@ -186,6 +186,7 @@ require ('./header.php');
                   <span>Пароль:</span>
                   <input
                     type="password"
+                    id="password"
                     class="profile__item-input"
                     value="<?echo $_SESSION['password']?>"
                     readonly
@@ -209,6 +210,26 @@ require ('./header.php');
           this.parentElement.querySelector('input').readOnly = false;
          }
       }
+
+      if(document.querySelector(".profile__btn").textContent == "Сохранить")
+      {
+        let formData = new FormData();
+        formData.append("id", <?= $_SESSION['id'] ?>);
+        formData.append("password", document.getElementById("password").value);
+        var request = new XMLHttpRequest();
+        request.open("POST", "/dist/php/scripts/updatepass.php", true);
+        request.onload = function(result_event) {
+          console.log(request.response);
+          if(Number.parseInt(request.response) > 0) {
+            alert("Пароль успешно изменен");
+          }
+          else {
+            alert("Ошибка при смене пароля");
+          }
+        };
+        request.send(formData);
+      }
+
       document.querySelector(".profile__btn").textContent = "Сохранить";
       var inputs = document.querySelectorAll(".profile__item-input");
       {
@@ -217,6 +238,8 @@ require ('./header.php');
           inputs[i].classList.add("profile__btn-active");
         }
       }
+
+     
     }
     </script>
     <?

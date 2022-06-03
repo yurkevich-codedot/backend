@@ -1,8 +1,6 @@
 <?php
 require ('./header-block.php');
 require ('./header.php');
-
-
 ?>
     <section class="background">
       <picture
@@ -37,8 +35,13 @@ require ('./header.php');
       <div class="container">
         <div class="content__wrapper">
           <?
-          $attractions = mysqli_query($mysqli,'SELECT * FROM `attractioninfo`');
-          $categories = mysqli_query($mysqli,'SELECT * FROM `categories`');
+          $extquery = "";
+          if(isset($_REQUEST['id']))
+          {
+            $extquery = "where locality_id=".$_REQUEST['id'];
+          }
+          $attractions = mysqli_query($mysqli,'SELECT * FROM `attractioninfo`  '.$extquery);
+          $categories = mysqli_query($mysqli, 'SELECT * FROM `categories` WHERE id IN (SELECT `attraction`.`category_id` FROM `attraction` '.$extquery.' )');
           $info = mysqli_fetch_all($attractions);
           $titles = mysqli_fetch_all($categories);
           foreach($titles as $title)
@@ -92,6 +95,75 @@ require ('./header.php');
         </div>
       </div>
     </section>
+    <script>
+      mapboxgl.accessToken  = 'pk.eyJ1IjoiZGFudmVyeXVyayIsImEiOiJjbDJ1NXY3YWgwYjV3M2NvNHRteW9tZXpkIn0.zXeb65io4SiZQl3BbejBMQ';
+      const mapPointer = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/danveryurk/cl3x8cuwi009r14rrtuggor4t',
+        center: [30.1959, 55.187],
+        zoom: 5
+      });
+
+      var getJSON = function (url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.responseType = "json";
+        xhr.onload = function () {
+          var status = xhr.status;
+          if (status === 200) {
+            callback(null, xhr.response);
+          } else {
+            callback(status, xhr.response);
+          }
+        };
+        xhr.send();
+      };
+
+      mapPointer.on('load', () => {
+        mapPointer.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png', function(error, image) {
+          if (error) throw error;
+          mapPointer.addImage('marker', image);
+
+          
+          getJSON('php/scripts/getgeojson.php?locality_id=<?= isset($_REQUEST['id']) ? $_REQUEST['id'] : 0?>', function(err, data) {
+            if (err !== null) {
+              alert('Something went wrong: ' + err);
+            } 
+            else {
+              mapPointer.flyTo({center:data.avg_location});
+
+              for (const feature of data.features) {
+                const el_div = document.createElement('div');
+                el_div.className = 'marker';
+                // var text = document.createTextNode(`${feature.properties.title}`);
+                // el_div.appendChild(text);
+
+                new mapboxgl.Marker(el_div).setLngLat(feature.geometry.coordinates).addTo(mapPointer);
+
+                new mapboxgl.Marker(el_div)
+                .setLngLat(feature.geometry.coordinates)
+                .setPopup( 
+                  new mapboxgl.Popup({ offset: 25 }) 
+                    .setHTML(
+                      `<h5>${feature.properties.title}</h5>
+                      <div style="display:flex"> 
+                        <div><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50 height=50></div>
+                        <div>
+                          <p>${feature.properties.category}(${feature.properties.type})</p>
+                          <p>Адрес: ${feature.properties.place}</p>
+                          <p>Дата основания: ${feature.properties.date}</p>
+                        </div>
+                      </div>
+                      <a href="attraction.php?id=${feature.properties.id}">Подробнее</a>`
+                    )
+                )
+                .addTo(mapPointer);
+              }
+            }
+          });
+        });
+      });
+    </script>
     <?
     require ('./preloader.php');
     require('./footer-block.php');

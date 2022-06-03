@@ -15,5 +15,10 @@ require("php/scripts/connect.php");
     <title>Home</title>
     <link rel="stylesheet" href="css/main.min.css" />
     <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+    <!-- map box library -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+
   </head>
   <body>

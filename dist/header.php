@@ -1,19 +1,6 @@
 
 <?
-require_once("php/scripts/connect.php");
-$search = $_POST['search'];
-if(isset($_POST['btn-search']))
-{
-  $query = mysqli_query($mysqli, "SELECT * FROM `attraction` WHERE name like '%$search%'");
-  $queryInfo = mysqli_fetch_all($query);
-    foreach($queryInfo as $item)
-    {
-      $id = $item[0];
-      echo "<script>window.location.href = 'attraction.php?id=$id'</script>";
-      break;
-    }
-  }
-  ;?>
+require_once("php/scripts/connect.php");?>
 
 <header class="header" id="myHeader">
     <div class="header__wrapper">
@@ -51,12 +38,17 @@ if(isset($_POST['btn-search']))
                 />
                   <ul class="main__prompt-items">
                     <?
-                    $attraction = mysqli_query($mysqli, "SELECT * FROM `attraction`  WHERE name like '%$search%'");
+                    $attraction = mysqli_query($mysqli, "SELECT attraction.id, attraction.name, 0 as type FROM attraction  WHERE name like '%$search%' UNION
+                    SELECT locality.id, locality.name, 1 as type FROM locality  WHERE name like '%$search%'; ");
+                    
                     $attractions = mysqli_fetch_all($attraction);
                     foreach($attractions as $item)
                     {
                       $text = $item[1];
-                      echo '<a href="attraction.php?id='.$item[0].'" class="main__prompt-item">'.strtolower($text).'</a>';
+                      if(intval($item[2]) == 0)
+                        echo '<a href="attraction.php?id='.$item[0].'" class="main__prompt-item">'.$text.'</a>';
+                      else  
+                        echo '<a href="content.php?id='.$item[0].'" class="main__prompt-item">'.$text.'</a>';
                     }
                     ?>
                   </ul>

@@ -180,7 +180,15 @@ $root_directory = dirname( __FILE__ );
             <h3 class="profile__content-title">
               Предложить достопримечательность
             </h3>
-            <form class="profile-article__wrapper" method="POST"  enctype="multipart/form-data" action="/dist/php/scripts/upload_photo.php">
+            <section class="map" data-barba="wrapper">
+              <div class="container" data-barba="container" data-barba-namespace="content">
+                <div class="map__wrapper">
+                  <div class="map__title">Местонахождение на карте:</div>
+                  <div class="map__content" id="map"></div>
+                </div>
+              </div>
+            </section>
+            <form class="profile-article__wrapper" name="upload_photo" method="POST"  enctype="multipart/form-data" action="/dist/php/scripts/upload_photo.php">
               <div class="profile__img-container">
                 <label class="profile__img-wrapper">
                     <div class="profile__img-inner">
@@ -208,7 +216,7 @@ $root_directory = dirname( __FILE__ );
                         </svg>
                       </div> 
                     <h5 class="profile__img-title">Нажмите для добавления фотографии</h5>
-                      <input type="file" name="pictures[]" id="file" onchange="showMyImage(this)" multiple accept="image/png"/></div>
+                      <input type="file"  id="file" onchange="showMyImage(this)" multiple accept="image/png"/></div>
                     </div>
                 </label>
                 <div class="profile__images-wrapper">
@@ -219,15 +227,16 @@ $root_directory = dirname( __FILE__ );
               <div class="profile__items">
                 <div class="profile__item">
                   <input
+                    name="item_article"
                     class="profile__item-input"
                     placeholder="Название достопримечательности"
                   />
                 </div>
                 <div class="profile__item">
-                  <textarea class="profile__item-input article" placeholder="Описание"></textarea>
+                  <textarea class="profile__item-input article" name="item_description" placeholder="Описание"></textarea>
                 </div>
                 <div class="profile__item">
-                  <select class="profile__item-input">
+                  <select class="profile__item-input" name="item_category">
                   <option value="" disabled="disabled" selected="selected">
                       Категория
                     </option>
@@ -236,13 +245,13 @@ $root_directory = dirname( __FILE__ );
                     $categories = mysqli_fetch_all($sql);
                     foreach( $categories as $item)
                     {
-                      echo '<option value="'.$item[1].'">'.$item[1].'</option>';
+                      echo '<option value="'.$item[0].'">'.$item[1].'</option>';
                     }
                     ?>
                   </select>
                 </div>
                 <div class="profile__item">
-                  <select class="profile__item-input">
+                  <select class="profile__item-input" name="item_locality">
                     <option value="" disabled="disabled" selected="selected">
                       Населенный пункт
                     </option>
@@ -251,13 +260,13 @@ $root_directory = dirname( __FILE__ );
                     $locality = mysqli_fetch_all($sql);
                     foreach( $locality as $item)
                     {
-                      echo '<option value="'.$item[1].'">'.$item[1].'</option>';
+                      echo '<option value="'.$item[0].'">'.$item[1].'</option>';
                     }
                     ?>
                   </select>
                 </div>
                 <div class="profile__item">
-                  <select class="profile__item-input">
+                  <select class="profile__item-input" name="item_type">
                     <option value="" disabled="disabled" selected="selected">
                       Тип
                     </option>
@@ -266,14 +275,12 @@ $root_directory = dirname( __FILE__ );
                     $type = mysqli_fetch_all($sql);
                     foreach( $type as $item)
                     {
-                      echo '<option value="'.$item[1].'">'.$item[1].'</option>';
+                      echo '<option value="'.$item[0].'">'.$item[1].'</option>';
                     }
                     ?>
                   </select>
                 </div>
-                <input type="submit" name="action">
-                <a href="#" class="profile__btn">Предложить достопримечательность</a>
-                  </input>
+                <input  class="profile__btn" type="submit" name="action" value="Предложить достопримечательность"/>
               </div>
               </form>
         </section>
@@ -282,6 +289,37 @@ $root_directory = dirname( __FILE__ );
     <script>
       let img__wrapper = document.querySelector(".profile__img-items")
       let index = 0;
+      let selected_coords = "0,0";
+      let filesUploaded = [];
+
+      var form = document.forms.namedItem("upload_photo");
+      form.addEventListener('submit', (e) =>{
+
+        let formData = new FormData(form);
+        formData.append('type', "attractions");
+        formData.append('coordinates', selected_coords);
+        filesUploaded.forEach(_file => {
+          if(_file != null)
+            formData.append('files[]', _file);
+        });
+
+        // todo: ТУТ НАДА ПРОВЕРКА НА ВАЛИДНОСТЬ ШТУК ВСЯКИХ 
+
+        var request = new XMLHttpRequest();
+        request.open("POST", "/dist/php/scripts/upload_photo.php", true);
+        request.onload = function(result_event) {
+          if(Number.parseInt(request.response) > 0) {
+            alert("Достопримечательность была успешно предложена!!!!!!!");
+            location.reload();
+          }
+          else {
+            alert("Ошибка добавления");
+          }
+        };
+        request.send(formData);
+        e.preventDefault();
+        
+      });
 
       function showMyImage(input)
       {
@@ -298,6 +336,9 @@ $root_directory = dirname( __FILE__ );
             {
               reader[i].onload = function(e)
               {
+                console.log("files: " +i+ " | index=" + index);
+                filesUploaded[index] = input.files[i];
+
                 let img__inner = document.createElement("div");
                 img__inner.classList.add("profile__img-inner");
                 img__inner.id = index;
@@ -317,6 +358,7 @@ $root_directory = dirname( __FILE__ );
                 function removeElement() {
                   if(img__inner.id == dlt_btn.id)
                   {
+                    filesUploaded[img__inner.id] = null;
                     document.getElementById(img__inner.id).remove();
                   }
                  }
@@ -325,6 +367,85 @@ $root_directory = dirname( __FILE__ );
           }
         }
       }
+
+      mapboxgl.accessToken  = 'pk.eyJ1IjoiZGFudmVyeXVyayIsImEiOiJjbDJ1NXY3YWgwYjV3M2NvNHRteW9tZXpkIn0.zXeb65io4SiZQl3BbejBMQ';
+      const mapPointer = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/danveryurk/cl3x8cuwi009r14rrtuggor4t',
+        center: [30.1959, 55.187],
+        zoom: 7,
+      });
+
+      var getJSON = function (url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.responseType = "json";
+        xhr.onload = function () {
+          var status = xhr.status;
+          if (status === 200) {
+            callback(null, xhr.response);
+          } else {
+            callback(status, xhr.response);
+          }
+        };
+        xhr.send();
+      };
+      
+      let tmpMarker = null;
+      mapPointer.on('style.load', function() {
+        mapPointer.on('click', function(e) {
+          var coordinates = e.lngLat;
+          const el_div = document.createElement('div');
+          el_div.className = 'marker';
+          if(tmpMarker != null)
+            tmpMarker.remove();
+
+          tmpMarker = new mapboxgl.Marker(el_div).setLngLat(coordinates).addTo(mapPointer);
+          selected_coords = coordinates.lng+","+coordinates.lat;
+          console.log("coords: "+selected_coords);
+        });
+      });
+
+      mapPointer.on('load', () => {
+        mapPointer.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png', function(error, image) {
+          if (error) throw error;
+          mapPointer.addImage('marker', image);
+          
+          getJSON('php/scripts/getgeojson.php', function(err, data) {
+            if (err !== null) {
+              alert('Something went wrong: ' + err);
+            } 
+            else {
+              mapPointer.flyTo({center:data.avg_location});
+              for (const feature of data.features) {
+                const el_div = document.createElement('div');
+                el_div.className = 'marker';
+
+                new mapboxgl.Marker(el_div).setLngLat(feature.geometry.coordinates).addTo(mapPointer);
+
+                new mapboxgl.Marker(el_div)
+                .setLngLat(feature.geometry.coordinates)
+                .setPopup( 
+                  new mapboxgl.Popup({ offset: 25 }) 
+                    .setHTML(
+                      `<h5>${feature.properties.title}</h5>
+                      <div style="display:flex"> 
+                        <div><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50 height=50></div>
+                        <div>
+                          <p>${feature.properties.category}(${feature.properties.type})</p>
+                          <p>Адрес: ${feature.properties.place}</p>
+                          <p>Дата основания: ${feature.properties.date}</p>
+                        </div>
+                      </div>
+                      <a href="attraction.php?id=${feature.properties.id}">Подробнее</a>`
+                    )
+                )
+                .addTo(mapPointer);
+              }
+            }
+          });
+        });
+      });
 
 
 
