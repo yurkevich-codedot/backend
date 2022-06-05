@@ -444,11 +444,11 @@ body {
 .login {
   align-items: center;
   display: flex;
-  min-height: 100vh;
 }
 .login__wrapper {
   display: flex;
   justify-content: center;
+  padding: 40px 0;
 }
 .login__form {
   background-color: #fff;
@@ -934,4 +934,8 @@ body {
   margin-top: 10px;
   display: flex;
   justify-content: center;
+}
+
+.admin-panel__item-link {
+  text-decoration: none;
 }

@@ -100,8 +100,8 @@ require ('./header.php');
       const mapPointer = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/danveryurk/cl3x8cuwi009r14rrtuggor4t',
-        center: [30.1959, 55.187],
-        zoom: 5
+        center: [28.7106827,55.4984886],
+        zoom: 7.5
       });
 
       var getJSON = function (url, callback) {
@@ -146,8 +146,8 @@ require ('./header.php');
                   new mapboxgl.Popup({ offset: 25 }) 
                     .setHTML(
                       `<h5>${feature.properties.title}</h5>
-                      <div style="display:flex"> 
-                        <div><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50 height=50></div>
+                      <div style="display:flex;flex-direction:column;"> 
+                        <div><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50% height=50%></div>
                         <div>
                           <p>${feature.properties.category}(${feature.properties.type})</p>
                           <p>Адрес: ${feature.properties.place}</p>

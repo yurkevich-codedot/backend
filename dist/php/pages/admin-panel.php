@@ -336,6 +336,10 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                   {
                     $item[0] = 'Секретное слово';
                   }
+                  else if($item[0]=='is_suggest')
+                  {
+                    $item[0] = 'Статус';
+                  }
                   echo '<p class="admin-panel__data-items-title">'.$item[0].'</p>';
                 }
                 ?>
@@ -346,7 +350,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                     while($row = mysqli_fetch_row($data_view)){
                       $data_id = mysqli_fetch_row($data);
                       $id = $data_id[0];
-                      echo  '<div class="admin-panel__item">';
+                      echo  '<a href="/dist/attraction.php?id='.$id.'" class="admin-panel__item admin-panel__item-link">';
                       foreach($row as $item){
                         if($first == false) {
                           $first = true;
@@ -361,7 +365,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                       <div class="admin-panel__item-name admin-panel__data-kit-select">
                       <form action="../pages/updateInfoPage.php" method="submit">
                       <input type="hidden" name="table" value="'.$_GET['table'].'"/>
-                      <button type="submit" name="id" value="'.$id.'" class="admin-panel__data-kit">
+                      <a href="/dist/profile-attraction.php?id='.$id.'&type=edit" class="admin-panel__data-kit">
                         <svg
                           width="16"
                           height="17"
@@ -393,7 +397,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                             fill="black"
                           />
                         </svg>
-                      </button>
+                      </a>
                       </form>
                       <form action="../scripts/deleteInfo.php" name="id" method="submit">
                       <input type="hidden" name="table" value="'.$_GET['table'].'"/>
@@ -427,7 +431,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                         </button>
                       </form>
                       </div>';
-                      echo "</div>";
+                      echo "</a>";
                    }
                   }
                   if($_GET['table']=='news'){
@@ -535,9 +539,12 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                   $first = false;
                   echo '
                   <div class="admin-panel__item-name admin-panel__data-kit-select">
-                  <form action="../pages/updateInfoPage.php" method="submit">
+                  <form action="" method="submit">
                   <input type="hidden" name="table" value="'.$_GET['table'].'"/>
-                  <button type="submit" name="id" value="'.$row[0].'" class="admin-panel__data-kit">
+                  ';
+                  if ($_GET['table']=='attraction')
+                  {
+                    echo'<a href="/dist/profile-attraction?type=edit" name="id" value="'.$row[0].'" class="admin-panel__data-kit">
                     <svg
                       width="16"
                       height="17"
@@ -569,7 +576,9 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                         fill="black"
                       />
                     </svg>
-                  </button>
+                  </a>';
+                  }
+                  echo '
                   </form>
                   <form action="../scripts/deleteInfo.php" name="id" method="submit">
                   <input type="hidden" name="table" value="'.$_GET['table'].'"/>
@@ -603,6 +612,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                     </button>
                   </form>
                   </div>';
+                
                   echo "</div>";
                }
               }
@@ -610,7 +620,23 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
               </div>
               <div class="admin-panel__data-kits-container">
               <div class="admin-panel__data-kit-select">
-                <a href="addinfoPage.php?table=<? echo $_GET['table'];?>" class="admin-panel__data-kit" >Добавить запись</a>
+                <?
+                   if ($table_name=='attraction')
+                   {
+                     echo'
+                     <a href="/dist/profile-attraction.php?type=add" class="admin-panel__data-kit" >Добавить запись</a>';
+                   }
+                   else if($table_name=='news')
+                   {
+                     echo'
+                     <a href="/dist/profile-article.php?type=add" class="admin-panel__data-kit" >Добавить запись</a>';
+                   }
+                   else
+                   {
+                     echo '
+                <a href="addinfoPage.php?table='.$_GET['table'].'" class="admin-panel__data-kit" >Добавить запись</a>';
+                   }
+                ?>
               </div>
             </div>
           </div>

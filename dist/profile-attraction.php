@@ -1,10 +1,18 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 require ('./header-block.php');
 require ('./header.php');
 $root_directory = dirname( __FILE__ );
     if ( isset( $_POST['action'] ) ) {
         copy( $root_directory.'../../../1.png', $root_directory.'/..1.png' );
     }
+
+$result_object = null;
+if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
+  $result_object = mysqli_fetch_assoc( mysqli_query($mysqli, "select * from attraction where id=".$_REQUEST['id']) );
+}   
 ?>
 
     <div class="container">
@@ -177,9 +185,19 @@ $root_directory = dirname( __FILE__ );
         </section>
         <section class="profile profile-attraction">
           <div class="profile__content">
-            <h3 class="profile__content-title">
+            <? if($_REQUEST['type'] == 'add'): ?>
+              <h3 class="profile__content-title">
+                Создать достопримечательность
+              </h3>
+            <?elseif($_REQUEST['type'] == 'edit'): ?>
+              <h3 class="profile__content-title">
+                Изменить достопримечательность
+              </h3>
+            <?else: ?>
+              <h3 class="profile__content-title">
               Предложить достопримечательность
             </h3>
+            <?endif; ?>
             <section class="map" data-barba="wrapper">
               <div class="container" data-barba="container" data-barba-namespace="content">
                 <div class="map__wrapper">
@@ -221,6 +239,18 @@ $root_directory = dirname( __FILE__ );
                 </label>
                 <div class="profile__images-wrapper">
                 <div class="profile__img-items">
+                  <?php 
+                    if($_REQUEST['type'] == 'edit' && is_dir("img/uploads/attractions/".$_REQUEST['id']."/")) {
+                        $images = scandir("img/uploads/attractions/".$_REQUEST['id']."/", 1);
+                        for ($i=0; $i < count($images)-2; $i++) { 
+                          $info = pathinfo($images[$i]);
+                          echo '<div class="profile__img-inner" id="'.$info['filename'].'">
+                                      <div onclick="removeEditPhoto(this)" class="profile__delete-btn" id="'.$info['filename'].'"></div>
+                                      <img class="img3" src="img/uploads/attractions/'.$_REQUEST['id'].'/'.$images[$i].'">
+                                    </div>';
+                        }
+                    }
+                ?>
                 </div>
                 </div>
             </div>
@@ -230,10 +260,11 @@ $root_directory = dirname( __FILE__ );
                     name="item_article"
                     class="profile__item-input"
                     placeholder="Название достопримечательности"
+                    value="<?=$result_object['name']?>"
                   />
                 </div>
                 <div class="profile__item">
-                  <textarea class="profile__item-input article" name="item_description" placeholder="Описание"></textarea>
+                  <textarea class="profile__item-input article" name="item_description" placeholder="Описание"><?=$result_object['discription']?></textarea>
                 </div>
                 <div class="profile__item">
                   <select class="profile__item-input" name="item_category">
@@ -245,7 +276,7 @@ $root_directory = dirname( __FILE__ );
                     $categories = mysqli_fetch_all($sql);
                     foreach( $categories as $item)
                     {
-                      echo '<option value="'.$item[0].'">'.$item[1].'</option>';
+                      echo '<option value="'.$item[0].'"  '.($item[0] == $result_object["category_id"] ? "selected":"").'>'.$item[1].'</option>';
                     }
                     ?>
                   </select>
@@ -260,7 +291,7 @@ $root_directory = dirname( __FILE__ );
                     $locality = mysqli_fetch_all($sql);
                     foreach( $locality as $item)
                     {
-                      echo '<option value="'.$item[0].'">'.$item[1].'</option>';
+                      echo '<option value="'.$item[0].'" '.($item[0] == $result_object["locality_id"] ? "selected":"").'>'.$item[1].'</option>';
                     }
                     ?>
                   </select>
@@ -275,12 +306,18 @@ $root_directory = dirname( __FILE__ );
                     $type = mysqli_fetch_all($sql);
                     foreach( $type as $item)
                     {
-                      echo '<option value="'.$item[0].'">'.$item[1].'</option>';
+                      echo '<option value="'.$item[0].'"  '.($item[0] == $result_object["types_id"] ? "selected":"").'>'.$item[1].'</option>';
                     }
                     ?>
                   </select>
                 </div>
-                <input  class="profile__btn" type="submit" name="action" value="Предложить достопримечательность"/>
+                <? if($_REQUEST['type'] == 'add'): ?>
+                  <input  class="profile__btn" type="submit" name="action" value="Создать достопримечательность"/>
+                <?elseif($_REQUEST['type'] == 'edit'): ?>
+                  <input  class="profile__btn" type="submit" name="action" value="Изменить достопримечательность"/>
+                <?else: ?>
+                  <input  class="profile__btn" type="submit" name="action" value="Предложить достопримечательность"/>
+                <?endif; ?>
               </div>
               </form>
         </section>
@@ -291,23 +328,35 @@ $root_directory = dirname( __FILE__ );
       let index = 0;
       let selected_coords = "0,0";
       let filesUploaded = [];
+      let removedEditedPhotos = []
+
+      function removeEditPhoto(e) {
+        removedEditedPhotos[removedEditedPhotos.length] =  e.id ;
+        e.parentElement.remove();
+      }
 
       var form = document.forms.namedItem("upload_photo");
       form.addEventListener('submit', (e) =>{
 
         let formData = new FormData(form);
         formData.append('type', "attractions");
+        formData.append('method', "<?=$_REQUEST['type']?>");
+        formData.append('id', "<?=$_REQUEST['id']?>");
         formData.append('coordinates', selected_coords);
         filesUploaded.forEach(_file => {
           if(_file != null)
             formData.append('files[]', _file);
         });
 
-        // todo: ТУТ НАДА ПРОВЕРКА НА ВАЛИДНОСТЬ ШТУК ВСЯКИХ 
+        removedEditedPhotos.forEach(item => {
+          formData.append('deleting[]', item);
+        });
 
         var request = new XMLHttpRequest();
         request.open("POST", "/dist/php/scripts/upload_photo.php", true);
         request.onload = function(result_event) {
+          console.log(request.response);
+
           if(Number.parseInt(request.response) > 0) {
             alert("Достопримечательность была успешно предложена!!!!!!!");
             location.reload();
@@ -411,7 +460,7 @@ $root_directory = dirname( __FILE__ );
           if (error) throw error;
           mapPointer.addImage('marker', image);
           
-          getJSON('php/scripts/getgeojson.php', function(err, data) {
+          getJSON('php/scripts/getgeojson.php?id=<?=$_REQUEST['id']?>', function(err, data) {
             if (err !== null) {
               alert('Something went wrong: ' + err);
             } 
@@ -421,8 +470,10 @@ $root_directory = dirname( __FILE__ );
                 const el_div = document.createElement('div');
                 el_div.className = 'marker';
 
-                new mapboxgl.Marker(el_div).setLngLat(feature.geometry.coordinates).addTo(mapPointer);
-
+                if(Object.keys(data.features).length > 1 )
+                  new mapboxgl.Marker(el_div).setLngLat(feature.geometry.coordinates).addTo(mapPointer);
+                else 
+                  tmpMarker = new mapboxgl.Marker(el_div).setLngLat(feature.geometry.coordinates).addTo(mapPointer);
                 new mapboxgl.Marker(el_div)
                 .setLngLat(feature.geometry.coordinates)
                 .setPopup( 

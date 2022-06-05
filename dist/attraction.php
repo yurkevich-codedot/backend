@@ -222,7 +222,7 @@ $isUserRatet = mysqli_num_rows($result);
       const mapPointer = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/danveryurk/cl3x8cuwi009r14rrtuggor4t',
-        center: [30.1959, 55.187],
+        center: [28.7106827,55.4984886],
         zoom: 15,
         interactive: false
       });

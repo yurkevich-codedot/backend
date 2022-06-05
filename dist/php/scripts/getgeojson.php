@@ -1,7 +1,7 @@
 <?php 
 require("connect.php");
 $tmpquery = "";
-if(isset($_REQUEST['id']))
+if(isset($_REQUEST['id']) &&  intval($_REQUEST['id']) > 0)
     $tmpquery .= " and id=".$_REQUEST['id'];
 if(isset($_REQUEST['locality_id']) && intval($_REQUEST['locality_id']) > 0)
     $tmpquery .= " and locality_id=".$_REQUEST['locality_id'];
@@ -14,30 +14,19 @@ $response["type"] = 'FeatureCollection';
 type: 'FeatureCollection',
 features: [
     {
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-77.032, 38.913],
-    },
-    properties: {
-        id:42,
-        title: 'Название',
-        description: 'Чота типо описания'
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [-77.032, 38.913],
+        },
+        properties: {
+            id:42,
+            title: 'Название',
+            description: 'Чота типо описания'
+        }
     }
-    },
-    {
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        coordinates: [-122.414, 37.776],
-    },
-    properties: {
-        id:68,
-        title: 'Название',
-        description: 'Описание'
-    }
-    }
-]
+],
+avg_location: [12, 12]
 */
 $avgLocation = [0, 0];
 while($row = mysqli_fetch_object($result)) {

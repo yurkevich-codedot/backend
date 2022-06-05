@@ -66,6 +66,9 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
             <div class="login__input-wrapper">
             <div class="login__input-wrapper-inner">
                 <?
+                $sql = mysqli_query($mysqli,"SELECT * FROM $table WHERE id=".$_REQUEST['id']);
+                $result_object = mysqli_fetch_assoc($sql);
+                //var_dump($result_object);
                 $data_columns = mysqli_fetch_all($data_columns);
                 foreach($data_columns as $item){
                   if($item[0]=='id')
@@ -80,7 +83,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
                     <select class="login__input" name="'.$item[0].'">';
                     foreach ($types as $type)
                     {
-                      echo '<option value="'.$type['id'].'">'.$type['name'].'</option>';
+                      echo '<option value="'.$type['id'].'" '.($type['id'] == $result_object[$item[0]] ? "selected":"").' >'.$type['name'].'</option>';
                     }
                     echo '</select>';                   
                   }
@@ -90,9 +93,14 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
                     <select class="login__input" name="'.$item[0].'">';
                     foreach ($categories as $category)
                     {
-                      echo '<option value="'.$category['id'].'">'.$category['name'].'</option>';
+                      echo '<option value="'.$category['id'].'" '.($category['id'] == $result_object[$item[0]] ? "selected":"").'>'.$category['name'].'</option>';
                     }
                     echo '</select>';                   
+                  }
+                  else if($item[0]=='is_suggest')
+                  {
+                    echo '<div class="login__input-name">'.$item[0].'</div>
+                    <input type="checkbox" class="login__input" '.($result_object[$item[0]] == 0 ? "checked":"").' name="'.$item[0].'"/>';
                   }
                   else if($item[0]=='user_id')
                   {
@@ -100,7 +108,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
                     <select class="login__input" name="'.$item[0].'">';
                     foreach ($users as $user)
                     {
-                      echo '<option value="'.$user['id'].'">'.$user['email'].'</option>';
+                      echo '<option value="'.$user['id'].'" '.($user['id'] == $result_object[$item[0]] ? "selected":"").'>'.$user['email'].'</option>';
                     }
                     echo '</select>';                   
                   }
@@ -110,18 +118,18 @@ $data = mysqli_query($mysqli, 'SELECT * FROM '.$_GET['table'].'');
                     echo '<select class="login__input" name="'.$item[0].'" >';
                     foreach ($localitys as $locality)
                     {
-                      echo '<option value="'.$locality['id'].'">'.$locality['name'].'</option>';
+                      echo '<option value="'.$locality['id'].'" '.($locality['id'] == $result_object[$item[0]] ? "selected":"").'>'.$locality['name'].'</option>';
                     }
                     echo '</select>';                   
                   }
                   else if($item[0]=='discription')
                     {
                       echo '<div class="login__input-name">'.$item[0].'</div>
-                      <textarea cols="40" rows="10" class="login__input" name="'.$item[0].'" value="" placeholder="'.$item[0].'" wrap="soft"></textarea>';          
+                      <textarea cols="40" rows="10" class="login__input" name="'.$item[0].'" value="" placeholder="'.$item[0].'" wrap="soft">'.$result_object[$item[0]].'</textarea>';          
                     }
                   else{
                     echo '<div class="login__input-name">'.$item[0].'</div>
-                    <input class="login__input" name="'.$item[0].'" value="'.$cur_data[0].'" placeholder="'.$item[0].'"/>';
+                    <input class="login__input" name="'.$item[0].'" value="'.$result_object[$item[0]].'" placeholder="'.$item[0].'"/>';
                   }
                 }
                 ?>
