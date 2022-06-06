@@ -15,11 +15,11 @@ $limit = 2;
 $ends_count = 1;
 $dots = false;
 $num = ($page * $limit)-$limit;
-$res_count = mysqli_query($mysqli, "SELECT COUNT(*) FROM `news` ");
+$res_count = mysqli_query($mysqli, "SELECT COUNT(*) FROM `news` WHERE `is_suggest`=0");
 $row = mysqli_fetch_row($res_count);
 $total = $row[0];
-$str_page = ceil($total/$limit)+1; 
-var_dump($str_page);
+
+$count=0;
 $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIMIT $num OFFSET $limit");
 ?>
     <section class="background">
@@ -48,10 +48,12 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
         <div class="news__items-wrapper">
           <div class="news__items">
             <?
-            $sql = mysqli_query($mysqli,"SELECT * FROM `news` ORDER BY `news`.`id` DESC LIMIT $num, $limit");
+            $sql = mysqli_query($mysqli,"SELECT * FROM `news` where `is_suggest`=0 ORDER BY `news`.`id` DESC LIMIT $num, $limit");
             $info = mysqli_fetch_all($sql);
             foreach($info as $item)
             {
+              if($item[5]==0)
+              {
               echo '
               <div class="news__item">
               <a href="/dist/paragraph.php?id='.$item[0].'" class="news__img-wrapper" title="'.$item[1].'"><img
@@ -66,12 +68,15 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
                 </div>
               </div>
               </div>';
+              $count++;
+              }
             }
             ?>
           </div>
           <div class="news__pagination">
             <div class="news__pagination-btns">
-              <?
+              <?              
+              $str_page = ceil($total/$limit);
               if($str_page==2)
               {
                 echo '';
@@ -82,7 +87,7 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
                 {
                   echo '<a href="?page='. ($cur_page_num - 1) .'" class="news__page-num news__page-arrow">«</a>';
                 }
-                for($i = 1;$i<$str_page;$i++)
+                for($i = 1;$i<=$str_page;$i++)
                 {
                   if($cur_page_num==$i)
                   {

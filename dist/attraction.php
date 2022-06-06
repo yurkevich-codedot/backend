@@ -17,14 +17,14 @@ $isUserRatet = mysqli_num_rows($result);
 
     <section class="background">
       <?
-       $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$id/main.png";
+       $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$id/0.png";
        $file_exists = file_exists($file);
        if($file_exists)
        {
       echo '
       <picture
         ><img
-          src="./img/uploads/attractions/'.$id.'/main.png"
+          src="./img/uploads/attractions/'.$id.'/0.png"
           class="background__img"
           alt="background"
       /></picture>';}
@@ -112,7 +112,7 @@ $isUserRatet = mysqli_num_rows($result);
             <div class="main__img-container infoswiper">
             <div class="swiper-wrapper swiper-flex">
               <?
-              $counter = 1;
+              $counter = 0;
               do
               {
                 $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$id/$counter.png";

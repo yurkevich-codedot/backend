@@ -22,7 +22,6 @@ require ('./header.php');
              $extquery = "";
              if(isset($_REQUEST['id']))
              {
-              //  $extquery = "where locality_id=".$_REQUEST['id'];
               $locality = mysqli_query($mysqli,"SELECT * FROM `locality` WHERE `locality`.`id`=".$_REQUEST['id'] );
               $localities = mysqli_fetch_all($locality);
               foreach($localities as $item)
@@ -68,9 +67,9 @@ require ('./header.php');
                             <div class="swiper-wrapper swiper-flex">';
                             foreach($info as $item)
                             {
-                                if($title[1]==$item[3])
+                                if($title[1]==$item[3] && $item[10]==0)
                                 {
-                                  $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$item[0]/main.png";
+                                  $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$item[0]/0.png";
                                   $file_exists = file_exists($file);
                                   echo '
                                     <div class="content__item swiper-slide">';
@@ -79,7 +78,7 @@ require ('./header.php');
                                       echo'
                                         <div class="main__img-wrapper">
                                           <img
-                                            src="./img/uploads/attractions/'.$item[0].'/main.png"
+                                            src="./img/uploads/attractions/'.$item[0].'/0.png"
                                             class="main__img"
                                             alt="'.$item[0].'"
                                           />

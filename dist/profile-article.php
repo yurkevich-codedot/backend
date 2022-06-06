@@ -1,6 +1,12 @@
 <?php
 require ('./header-block.php');
 require ('./header.php');
+
+$result_object = null;
+if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
+  $result_object = mysqli_fetch_assoc( mysqli_query($mysqli, "select * from news where id=".$_REQUEST['id']) );
+}   
+
 ?>
 
     <div class="container">
@@ -173,7 +179,19 @@ require ('./header.php');
         </section>
         <section class="profile profile-article">
           <div class="profile__content">
-            <h3 class="profile__content-title">Предложить статью</h3>
+          <? if($_REQUEST['type'] == 'add'): ?>
+              <h3 class="profile__content-title">
+                Создать статью
+              </h3>
+            <?elseif($_REQUEST['type'] == 'edit'): ?>
+              <h3 class="profile__content-title">
+                Изменить статью
+              </h3>
+            <?else: ?>
+              <h3 class="profile__content-title">
+              Предложить статью
+            </h3>
+            <?endif; ?>
             <form class="profile-article__wrapper" name="upload_photo" method="POST"  enctype="multipart/form-data" action="/dist/php/scripts/upload_photo.php">
             <div class="profile__img-container">
                 <label class="profile__img-wrapper">
@@ -208,6 +226,18 @@ require ('./header.php');
                 </label>
                 <div class="profile__images-wrapper">
                   <div class="profile__img-items">
+                  <?php 
+                    if($_REQUEST['type'] == 'edit' && is_dir("img/uploads/news/".$_REQUEST['id']."/")) {
+                        $images = scandir("img/uploads/news/".$_REQUEST['id']."/", 1);
+                        for ($i=0; $i < count($images)-2; $i++) { 
+                          $info = pathinfo($images[$i]);
+                          echo '<div class="profile__img-inner" id="'.$info['filename'].'">
+                                      <div onclick="removeEditPhoto(this)" class="profile__delete-btn" id="'.$info['filename'].'"></div>
+                                      <img class="img3" src="img/uploads/news/'.$_REQUEST['id'].'/'.$images[$i].'">
+                                    </div>';
+                        }
+                    }
+                ?>
                   </div>
                 </div>
             </div>
@@ -217,12 +247,20 @@ require ('./header.php');
                     name="item_article"
                     class="profile__item-input"
                     placeholder="Заголовок статьи"
+                    value="<?=$result_object['name']?>"
                   />
                 </div>
                 <div class="profile__item">
-                <textarea class="profile__item-input article" name="item_description" placeholder="Описание"></textarea>
+                <textarea class="profile__item-input article" name="item_description" placeholder="Описание"><?=$result_object['discription']?></textarea>
                 </div>
-                <input  class="profile__btn" type="submit" name="action" value="Предложить новость"/>
+                <? if($_REQUEST['type'] == 'add'): ?>
+                  <input  class="profile__btn" type="submit" name="action" value="Создать статью"/>
+                <?elseif($_REQUEST['type'] == 'edit'): ?>
+                  <input type="checkbox" name="suggest"/><label for="suggest">Опубликовать запись</label>
+                  <input  class="profile__btn" type="submit" name="action" value="Изменить статью"/>
+                <?else: ?>
+                  <input  class="profile__btn" type="submit" name="action" value="Предложить достопримечательность"/>
+                <?endif; ?>
               </div>
             </form>
           </div>
@@ -233,22 +271,35 @@ require ('./header.php');
       let img__wrapper = document.querySelector(".profile__img-items")
       let index = 0;
       let filesUploaded = [];
+      let removedEditedPhotos = []
+
+      function removeEditPhoto(e) {
+        removedEditedPhotos[removedEditedPhotos.length] =  e.id ;
+        e.parentElement.remove();
+      }
+
 
       var form = document.forms.namedItem("upload_photo");
       form.addEventListener('submit', (e) =>{
 
         let formData = new FormData(form);
         formData.append('type', "news");
+        formData.append('method', "<?=$_REQUEST['type']?>");
+        formData.append('id', "<?=$_REQUEST['id']?>");
         filesUploaded.forEach(_file => {
           if(_file != null)
             formData.append('files[]', _file);
         });
 
+        removedEditedPhotos.forEach(item => {
+          formData.append('deleting[]', item);
+        });
         // todo: ТУТ НАДА ПРОВЕРКА НА ВАЛИДНОСТЬ ШТУК ВСЯКИХ 
 
         var request = new XMLHttpRequest();
         request.open("POST", "/dist/php/scripts/upload_photo.php", true);
         request.onload = function(result_event) {
+          console.log(request.response);
           if(Number.parseInt(request.response) > 0) {
             alert("Новость была успешно предложена!!!!!!!");
             location.reload();

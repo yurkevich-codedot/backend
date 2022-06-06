@@ -753,7 +753,7 @@ body {
 }
 @media (min-width: 1279.98px) {
   .admin-panel__item {
-    grid-template-columns: 13% 13% 13% 13% 10% 10% 10% 8% 5% 4%;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 5% 5% 10%;
   }
 }
 .admin-panel__item:before {

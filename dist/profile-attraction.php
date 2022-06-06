@@ -314,6 +314,7 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
                 <? if($_REQUEST['type'] == 'add'): ?>
                   <input  class="profile__btn" type="submit" name="action" value="Создать достопримечательность"/>
                 <?elseif($_REQUEST['type'] == 'edit'): ?>
+                  <input type="checkbox" name="suggest"/><label for="suggest">Опубликовать запись</label>
                   <input  class="profile__btn" type="submit" name="action" value="Изменить достопримечательность"/>
                 <?else: ?>
                   <input  class="profile__btn" type="submit" name="action" value="Предложить достопримечательность"/>
