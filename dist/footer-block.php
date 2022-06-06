@@ -49,12 +49,12 @@ $attarction = mysqli_fetch_all($sqlAttraction);
               </div>
             </div>
             <div class="footer__list-wrapper">
-              <a href="#" class="footer__list-title">Населенный пункт</a>
+              <a href="/dist/content.php" class="footer__list-title">Населенный пункт</a>
               <div class="footer__items">
                 <?
                 foreach($locality as $item) 
                 echo'
-                <a href="#" class="footer__item">'.$item[1].'</a>';
+                <a href="/dist/content.php?id='.$item[0].'" class="footer__item">'.$item[1].'</a>';
                 ?>
               </div>
             </div>
@@ -71,7 +71,6 @@ $attarction = mysqli_fetch_all($sqlAttraction);
       </div>
     </footer>
       <script src="./js/preloader.js">
-
       </script>
     <script src="./js/main.min.js"></script>
   </body>

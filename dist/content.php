@@ -18,7 +18,24 @@ require ('./header.php');
             >
           </div>
           <div class="content__discription">
-            <h1 class="main__title">Достопримечательности</h1>
+            <?
+             $extquery = "";
+             if(isset($_REQUEST['id']))
+             {
+              //  $extquery = "where locality_id=".$_REQUEST['id'];
+              $locality = mysqli_query($mysqli,"SELECT * FROM `locality` WHERE `locality`.`id`=".$_REQUEST['id'] );
+              $localities = mysqli_fetch_all($locality);
+              foreach($localities as $item)
+              {
+                echo '<h1 class="main__title">Достопримечательности в г.'.$item[1].'</h1>';
+              }
+             }
+             else
+             {
+              echo '<h1 class="main__title">Достопримечательности</h1>';
+             }
+            ?>
+          
           </div>
         </div>
       </div>
@@ -145,9 +162,9 @@ require ('./header.php');
                 .setPopup( 
                   new mapboxgl.Popup({ offset: 25 }) 
                     .setHTML(
-                      `<h5>${feature.properties.title}</h5>
-                      <div style="display:flex;flex-direction:column;"> 
-                        <div><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50% height=50%></div>
+                      `<h6 style="text-align:center;">${feature.properties.title}</h6>
+                      <div style="display:flex;flex-direction:column;gap:5px;"> 
+                      <div style="justify-content:center;display:flex;"><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50% height=50%></div>
                         <div>
                           <p>${feature.properties.category}(${feature.properties.type})</p>
                           <p>Адрес: ${feature.properties.place}</p>

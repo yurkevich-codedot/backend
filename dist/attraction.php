@@ -77,7 +77,13 @@ $isUserRatet = mysqli_num_rows($result);
             <div class="rating__value">'.round($resultRating, 1).'</div>
           </div>';
           if($isUserRatet <= 0)
+          {
             echo '<input type="submit" class="btn" name="'.$id.'" value="Оценить"/>';
+          }
+          else
+          {
+            echo 'Вы уже оценили данную достопримечательность!';
+          }
           echo '</form>';
             }
           ?>
@@ -138,7 +144,6 @@ $isUserRatet = mysqli_num_rows($result);
         </div>
         </div>
       </div>
-      <!-- </div> -->
     </section>
     <section class="map">
       <div class="container">
@@ -265,9 +270,9 @@ $isUserRatet = mysqli_num_rows($result);
                 .setPopup( 
                   new mapboxgl.Popup({ offset: 25 }) 
                     .setHTML(
-                      `<h5>${feature.properties.title}</h5>
-                      <div style="display:flex"> 
-                        <div><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50 height=50></div>
+                      `<h6 style="text-align:center;">${feature.properties.title}</h6>
+                      <div style="display:flex;flex-direction:column;gap:5px;"> 
+                        <div style="justify-content:center;display:flex;"><img src="img/uploads/attractions/${feature.properties.id}/1.png" width=50% height=50%></div>
                         <div>
                           <p>${feature.properties.category}(${feature.properties.type})</p>
                           <p>Адрес: ${feature.properties.place}</p>
