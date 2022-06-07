@@ -299,7 +299,6 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
         var request = new XMLHttpRequest();
         request.open("POST", "/dist/php/scripts/upload_photo.php", true);
         request.onload = function(result_event) {
-          console.log(request.response);
           if(Number.parseInt(request.response) > 0) {
             alert("Новость была успешно предложена!!!!!!!");
             location.reload();

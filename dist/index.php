@@ -9,7 +9,7 @@ require ('./header.php');
             <div class="index-swiper__img-wrapper">
               <picture
                 ><img
-                  src="./img/uploads/background.png"
+                  src="./img/uploads/BRASL.png"
                   class="background__img"
                   alt="background"
               /></picture>
@@ -26,7 +26,7 @@ require ('./header.php');
             <div class="index-swiper__img-wrapper">
               <picture
                 ><img
-                  src="./img/uploads/background.png"
+                  src="./img/uploads/attr.png"
                   class="background__img"
                   alt="background"
               /></picture>
@@ -43,24 +43,7 @@ require ('./header.php');
             <div class="index-swiper__img-wrapper">
               <picture
                 ><img
-                  src="./img/uploads/background.png"
-                  class="background__img"
-                  alt="background"
-              /></picture>
-            </div>
-            <div class="container">
-              <div class="index-swiper__background">
-              <h1 class="main__title index-swiper--title">
-                Актуальная информация 
-              </h1>
-              </div>
-            </div>
-          </div>
-          <div class="index-swiper__item swiper-slide">
-            <div class="index-swiper__img-wrapper">
-              <picture
-                ><img
-                  src="./img/uploads/background.png"
+                  src="./img/uploads/1200px-Flag_of_Viciebsk,_Belarus.svg.png"
                   class="background__img"
                   alt="background"
               /></picture>
