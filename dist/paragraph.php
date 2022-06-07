@@ -10,13 +10,13 @@ $info = mysqli_fetch_all($sql);
 
     <section class="background">
       <?
-      $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/news/$id/main.png";
+      $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/news/$id/0.png";
       $file_exists = file_exists($file);
       if($file_exists)
       {
         echo '<picture
         ><img
-          src="./img/uploads/news/'.$id.'/main.png"
+          src="./img/uploads/news/'.$id.'/0.png"
           class="background__img"
           alt="background"
       /></picture>';
@@ -25,7 +25,7 @@ $info = mysqli_fetch_all($sql);
         {
           echo '<picture
           ><img
-            src="./img/uploads/background.png"
+            src="./img/uploads/news/'.$id.'/0.png"
             class="background__img"
             alt="background"
         /></picture>';
@@ -83,7 +83,7 @@ $info = mysqli_fetch_all($sql);
             <div class="main__img-container infoswiper">
               <div class="swiper-wrapper swiper-flex">
               <?
-              $counter = 1; 
+              $counter = 0; 
               do
               {
               $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/news/$id/$counter.png";

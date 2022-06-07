@@ -34,7 +34,7 @@ require ('./header.php');
             <div class="container">
               <div class="index-swiper__background">
               <h1 class="main__title index-swiper--title">
-               Слайд 2
+                Поиск по всем достопримечательностям Витебской области
               </h1>
               </div>
             </div>
@@ -51,7 +51,24 @@ require ('./header.php');
             <div class="container">
               <div class="index-swiper__background">
               <h1 class="main__title index-swiper--title">
-                Слайд 3
+                Актуальная информация 
+              </h1>
+              </div>
+            </div>
+          </div>
+          <div class="index-swiper__item swiper-slide">
+            <div class="index-swiper__img-wrapper">
+              <picture
+                ><img
+                  src="./img/uploads/background.png"
+                  class="background__img"
+                  alt="background"
+              /></picture>
+            </div>
+            <div class="container">
+              <div class="index-swiper__background">
+              <h1 class="main__title index-swiper--title">
+                Для предложения вашей статьи/достопримечательности авторизуйтесь
               </h1>
               </div>
             </div>

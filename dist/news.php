@@ -2,6 +2,8 @@
 require ('./header-block.php');
 require ('./header.php');
 
+
+
 if(isset($_GET['page']))
 {
   $page= $_GET['page'];
@@ -18,7 +20,7 @@ $num = ($page * $limit)-$limit;
 $res_count = mysqli_query($mysqli, "SELECT COUNT(*) FROM `news` WHERE `is_suggest`=0");
 $row = mysqli_fetch_row($res_count);
 $total = $row[0];
-
+$str_page = ceil($total/$limit);
 $count=0;
 $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIMIT $num OFFSET $limit");
 ?>
@@ -52,15 +54,21 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
             $info = mysqli_fetch_all($sql);
             foreach($info as $item)
             {
+              $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/news/$item[0]/0.png";
+              $file_exists = file_exists($file);
               if($item[5]==0)
               {
-              echo '
+                if($file_exists)
+                {
+                  echo '
               <div class="news__item">
               <a href="/dist/paragraph.php?id='.$item[0].'" class="news__img-wrapper" title="'.$item[1].'"><img
-                  src="./img/uploads/background.png"
+                  src="./img/uploads/news/'.$item[0].'/0.png"
                   class="news__img"
                   alt="'.$item[0].'"
-              /></a>
+              /></a>';
+                }
+                echo'
               <div class="news__name-wrapper">
                 <a href="/dist/paragraph.php?id='.$item[0].'" class="news__name" title="'.$item[1].'">'.$item[1].'</a>
                 <div class="news__discription">
@@ -68,7 +76,6 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
                 </div>
               </div>
               </div>';
-              $count++;
               }
             }
             ?>
@@ -76,7 +83,6 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
           <div class="news__pagination">
             <div class="news__pagination-btns">
               <?              
-              $str_page = ceil($total/$limit);
               if($str_page==2)
               {
                 echo '';
