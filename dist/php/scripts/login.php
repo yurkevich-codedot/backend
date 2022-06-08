@@ -6,8 +6,7 @@
         unset($_SESSION['email']);
     }
 
-    // if(isset($_GET['submit'])){
-         $email = $_POST['email'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
 
          $result = mysqli_fetch_array(mysqli_query($mysqli,"SELECT * FROM `usersdost`  WHERE `email`='$email' and `password`='$password';"));
@@ -24,5 +23,4 @@
             echo "<script>window.location.href='/dist/php/pages/loginPage.php';</script>";
             $_SESSION['errors'] = 'Не правильно введенны данные или же пользователя не существует!';
         }
-    // }
 ?>

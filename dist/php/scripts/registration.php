@@ -1,6 +1,5 @@
 <?
 require('../scripts/connect.php');
-// $data_columns = mysqli_query($mysqli, 'SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`= `usersdost` ORDER BY ordinal_position');
 $email = $_POST['email'];
 $password = $_POST['password'];
 $secret = $_POST['secret'];

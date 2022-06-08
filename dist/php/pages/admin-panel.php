@@ -2,6 +2,12 @@
 session_start();
 require("../scripts/connect.php");
 require("../scripts/selectinfo.php");
+
+if($_SESSION['role']!='admin')
+{
+  echo "<script>alert('У вас нет прав для посещения данной страницы!')</script>";
+  echo "<script>window.location.href='/dist/index.php';</script>";
+}
 if(!isset($_GET['table'])) $_GET['table'] = 'attraction';
 $table_name = $_GET['table'];
 if($table_name)
