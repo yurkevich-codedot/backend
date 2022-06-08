@@ -55,7 +55,7 @@ $info = mysqli_fetch_all($sql);
              echo '
              <div class="paragraph__about-wrapper">
              <div class="paragraph__about-inner">
-                 <div class="paragraph__about-user">Автор: '.$k[4].'</div>
+                 <div class="paragraph__about-user">Автор: '.$k[5].'</div>
                  <div class="paragraph__about-data"> Дата публикации:'.$k[3].'</div>
                  </div>
                  </div>';

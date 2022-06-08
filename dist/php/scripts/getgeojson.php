@@ -10,24 +10,7 @@ if(isset($_REQUEST['locality_id']) && intval($_REQUEST['locality_id']) > 0)
 $result = mysqli_query($mysqli, "SELECT * FROM `attractioninfo` where is_suggest=0 ". $tmpquery);
 $response["type"] = 'FeatureCollection';
 
-/*
-type: 'FeatureCollection',
-features: [
-    {
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [-77.032, 38.913],
-        },
-        properties: {
-            id:42,
-            title: 'Название',
-            description: 'Чота типо описания'
-        }
-    }
-],
-avg_location: [12, 12]
-*/
+
 $avgLocation = [0, 0];
 while($row = mysqli_fetch_object($result)) {
     $tmpObject["type"] = 'Feature';
@@ -48,5 +31,5 @@ while($row = mysqli_fetch_object($result)) {
 $response["avg_location"] = [$avgLocation[0] / count($response["features"]), $avgLocation[1] / count($response["features"])]; 
 header('Content-type: application/json');
 echo json_encode( $response, JSON_UNESCAPED_UNICODE );
-//print_r($response);
+
 ?>

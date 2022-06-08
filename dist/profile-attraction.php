@@ -267,6 +267,14 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
                   <textarea class="profile__item-input article" name="item_description" placeholder="Описание"><?=$result_object['discription']?></textarea>
                 </div>
                 <div class="profile__item">
+                  <input
+                    name="address"
+                    class="profile__item-input"
+                    placeholder="Адрес"
+                    value="<?=$result_object['address']?>"
+                  />
+                </div>
+                <div class="profile__item">
                   <select class="profile__item-input" name="item_category">
                   <option value="" disabled="disabled" selected="selected">
                       Категория

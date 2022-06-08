@@ -13,7 +13,7 @@ else
   $page = 1;
 }
 $cur_page_num = $_GET['page'];
-$limit = 8;
+$limit = 4;
 $ends_count = 1;
 $dots = false;
 $num = ($page * $limit)-$limit;
@@ -108,11 +108,11 @@ $sql = mysqli_query($mysqli, "SELECT * FROM `news` ORDER BY `news`.`id` DESC LIM
                       $dots = false;  
                     }
                   }
-                if($cur_page_num+1!=$str_page && $cur_page_num && ($cur_page_num < $str_page || -1==$str_page))
-                {
-                  echo '<a href="?page='. ($cur_page_num + 1) .'" class="news__page-num news__page-arrow"> »</a>';
                 }
-              }
+                if($cur_page_num!=$str_page && $cur_page_num && ($cur_page_num < $str_page || -1==$str_page))
+                {
+                  echo '<a href="?page='. ($cur_page_num + 1) .'" class="news__page-num news__page-arrow">»</a>';
+                }
               ?>
             </div>
           </div>
