@@ -82,7 +82,14 @@ $isUserRatet = mysqli_num_rows($result);
           }
           else
           {
+            if(isset($_SESSION['id']))
+            {
             echo 'Вы уже оценили данную достопримечательность!';
+            }
+            else
+            {
+              echo 'Для оценки достопримечательности авторизируйтесь!';
+            }
           }
           echo '</form>';
             }
