@@ -72,7 +72,6 @@ require("../scripts/connect.php");
           <div class="login__input-wrapper-inner">
             <div class="login__input-name">
               Пароль
-              <a href="#" class="link">Забыли пароль?</a>
             </div>
             <input type="password" class="login__input" placeholder="Пароль" name="password"/>
           </div>
