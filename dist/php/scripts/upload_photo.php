@@ -22,8 +22,14 @@ if($_REQUEST['type'] == 'attractions') {
     (isset($_REQUEST['suggest']) ? 1 : 0 );
     $discription = $_REQUEST["item_description"];
 
+    if($_SESSION['role']=='admin')
+    {
+        $is_suggest = 0;
+    }
+
     $sql = "INSERT INTO attraction VALUES (null,'$name',  $category_id, '$address', $locality_id, $date, '$coordinates', $types_id, $is_suggest, '$discription')";
 
+    
     if($_REQUEST['method'] == 'edit' ) {
         
         if(isset($_REQUEST['deleting']) && count($_REQUEST['deleting']) > 0)
@@ -32,10 +38,7 @@ if($_REQUEST['type'] == 'attractions') {
                 unlink($uploads_dir);
             }
         $sql = "update attraction set name='$name', category_id=$category_id, address='$address', locality_id=$locality_id, date=$date, coordinates='$coordinates', types_id=$types_id, is_suggest=$is_suggest, discription='$discription'
-        where id=".$_REQUEST['id'];
-
-
-        
+        where id=".$_REQUEST['id'];        
     }
     
 }
@@ -44,8 +47,13 @@ else if($_REQUEST['type'] == 'news') {
     $discription = $_REQUEST["item_description"];
     $date = "Now()";
     $user_id = $_SESSION['id'];
-    $is_suggest =  ($_REQUEST['method'] == 'add') ? 0 :  
-    (isset($_REQUEST['suggest']) ? 1 : 0 );
+    $is_suggest =  ($_REQUEST['method'] == 'add') ? 1 :  
+    (isset($_REQUEST['suggest']) ? 0 : 1 );
+
+    if($_SESSION['role']=='admin')
+    {
+        $is_suggest = 0;
+    }
 
     $sql = "INSERT INTO news VALUES (null, '$name',  '$discription', $date, $user_id, $is_suggest)";
 
