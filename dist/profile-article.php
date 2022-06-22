@@ -11,7 +11,7 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
 
     <div class="container">
       <div class="profile__wrapper">
-        <section class="profile profile-menu">
+      <section class="profile profile-menu">
           <div class="profile-menu__item">
             <div class="profile-menu__item-icon">
               <svg
@@ -41,7 +41,54 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
               >Профиль</a
             >
           </div>
-          <div class="profile-menu__item">
+          <?
+          if($_SESSION['role']=='admin')
+          {
+            echo ' <div class="profile-menu__item">
+            <div class="profile-menu__item-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 4V4C8.22876 4 6.34315 4 5.17157 5.17157C4 6.34315 4 8.22876 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C15.7712 20 17.6569 20 18.8284 18.8284C20 17.6569 20 15.7712 20 12V12"
+                  stroke="black"
+                  stroke-width="2"
+                />
+                <path
+                  d="M9 10L15 10"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 14H12"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M19 8L19 2M16 5H22"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <a href="/dist/profile-article.php" class="profile-menu__item-link"
+              >Добавить статью</a
+            >
+          </div>';
+          }
+          else
+          {
+            echo ' <div class="profile-menu__item">
             <div class="profile-menu__item-icon">
               <svg
                 width="24"
@@ -81,8 +128,34 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
             <a href="/dist/profile-article.php" class="profile-menu__item-link"
               >Предложить статью</a
             >
-          </div>
-          <div class="profile-menu__item">
+          </div>';
+          }
+          ?>
+          <?if($_SESSION['role']=='admin')
+          {
+            echo '<div class="profile-menu__item">
+            <div class="profile-menu__item-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.398 19.804L12.8585 20.6917L12.8585 20.6917L12.398 19.804ZM11.602 19.804L11.1415 20.6917L11.1415 20.6917L11.602 19.804ZM18 11C18 13.1458 16.9079 14.9159 15.545 16.2906C14.183 17.6644 12.6342 18.555 11.9376 18.9163L12.8585 20.6917C13.6448 20.2838 15.397 19.2805 16.9653 17.6987C18.5326 16.1178 20 13.8706 20 11H18ZM12 5C15.3137 5 18 7.68629 18 11H20C20 6.58172 16.4183 3 12 3V5ZM6 11C6 7.68629 8.68629 5 12 5V3C7.58172 3 4 6.58172 4 11H6ZM12.0624 18.9163C11.3658 18.555 9.81702 17.6644 8.45503 16.2906C7.09211 14.9159 6 13.1458 6 11H4C4 13.8706 5.46741 16.1178 7.03474 17.6987C8.60299 19.2805 10.3552 20.2838 11.1415 20.6917L12.0624 18.9163ZM11.9376 18.9163C11.9514 18.9091 11.9733 18.9023 12 18.9023C12.0267 18.9023 12.0486 18.9091 12.0624 18.9163L11.1415 20.6917C11.6831 20.9726 12.3169 20.9726 12.8585 20.6917L11.9376 18.9163ZM14 11C14 12.1046 13.1046 13 12 13V15C14.2091 15 16 13.2091 16 11H14ZM12 9C13.1046 9 14 9.89543 14 11H16C16 8.79086 14.2091 7 12 7V9ZM10 11C10 9.89543 10.8954 9 12 9V7C9.79086 7 8 8.79086 8 11H10ZM12 13C10.8954 13 10 12.1046 10 11H8C8 13.2091 9.79086 15 12 15V13Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+            <a href="/dist/profile-attraction.php" class="profile-menu__item-link"
+              >Добавить достопримечательность</a
+            >
+          </div>';
+          }
+          else
+          {
+            echo '<div class="profile-menu__item">
             <div class="profile-menu__item-icon">
               <svg
                 width="24"
@@ -100,7 +173,9 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
             <a href="/dist/profile-attraction.php" class="profile-menu__item-link"
               >Предложить достопримечательность</a
             >
-          </div>
+          </div>';
+          }
+            ?>
           <?if ($_SESSION['role'] == 'admin')
               {
                 echo  '<div class="profile-menu__item">
@@ -152,8 +227,7 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
               </div>';
               } 
               ?>
-         
-         <div class="profile-menu__item">
+          <div class="profile-menu__item">
             <div class="profile-menu__item-icon">
               <svg
                 width="24"
@@ -172,11 +246,9 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
                 />
               </svg>
             </div>
-            <a href="/dist/php/pages/loginPage.php" class="profile-menu__item-link">Выйти
-              <??>
-            </a>
+            <a href="/dist/php/pages/loginPage.php" class="profile-menu__item-link">Выйти</a>
           </div>
-        </section>
+      </section>
         <section class="profile profile-article">
           <div class="profile__content">
           <? if($_REQUEST['type'] == 'add'): ?>
@@ -294,8 +366,6 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
         removedEditedPhotos.forEach(item => {
           formData.append('deleting[]', item);
         });
-        // todo: ТУТ НАДА ПРОВЕРКА НА ВАЛИДНОСТЬ ШТУК ВСЯКИХ 
-
         var request = new XMLHttpRequest();
         request.open("POST", "/dist/php/scripts/upload_photo.php", true);
         request.onload = function(result_event) {
@@ -358,9 +428,6 @@ if(isset($_REQUEST['type']) && isset($_REQUEST['id'])) {
           }
         }
       }
-
-
-
     </script>
     <?
     require ('./preloader.php');

@@ -14,13 +14,13 @@ if($table_name)
 {
   if($table_name == 'attraction')
   {
-    $data_view = mysqli_query($mysqli,"SELECT * FROM `attractioninfo`");
+    $data_view = mysqli_query($mysqli,"SELECT * FROM `attractioninfo` ORDER BY `attractioninfo`.`id` ASC");
     $data_columns = mysqli_query($mysqli, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`= 'attractioninfo' ORDER BY ordinal_position");
     $sort_columns = mysqli_query($mysqli, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`= 'attractioninfo' ORDER BY ordinal_position");
   }
   else if($table_name == 'news')
   {
-    $data_view = mysqli_query($mysqli,"SELECT * FROM `newsinfo`");
+    $data_view = mysqli_query($mysqli,"SELECT * FROM `newsinfo` ORDER BY `newsinfo`.`id` DESC");
     $data_columns = mysqli_query($mysqli, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`= 'newsinfo' ORDER BY ordinal_position");
     $sort_columns = mysqli_query($mysqli, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`= 'newsinfo' ORDER BY ordinal_position");
   }
@@ -223,59 +223,6 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
             }
             ?>
               </div>
-              <div class="admin-panel__data-kits">
-              <span>Сортировать</span>
-                <select class="admin-panel__data-kit" name="sort" id="sort">
-                  <?
-                    $sort_columns = mysqli_fetch_all($sort_columns);
-                    foreach($sort_columns as $info)
-                    {
-                      if($info[0]=='name')
-                      {
-                        $info[0] = 'Наименование';
-                      }
-                      else if($info[0]=='category_id')
-                      {
-                        $info[0] = 'Категория';
-                      }
-                      else if($info[0]=='address')
-                      {
-                        $info[0] = 'Адрес';
-                      }
-                      else if($info[0]=='locality_id')
-                      {
-                        $info[0] = 'Населенный пункт';
-                      }
-                      else if($info[0]=='date')
-                      {
-                        $info[0] = 'Дата основания';
-                      }
-                      else if($info[0]=='discription')
-                      {
-                        $info[0] = 'Описание';
-                      }
-                      else if($info[0]=='email')
-                      {
-                        $info[0] = 'Эл. почта';
-                      }
-                      else if($info[0]=='password')
-                      {
-                        $info[0] = 'Пароль';
-                      }
-                      else if($info[0]=='role')
-                      {
-                        $info[0] = 'Роль';
-                      }
-                      else if($info[0]=='secret_word')
-                      {
-                        $info[0] = 'Секретное слово';
-                      }
-                        echo '<option value="'.$info[0].'Up">'.$info[0].' (↑)</option>';
-                        echo '<option value="'.$info[0].'Down">'.$info[0].' (↓)</option>';
-                    }
-                  ?>
-                </select>
-              </div>
             </div>
             <div class="admin-panel__data-items-wrapper">
               <div class="admin-panel__item">
@@ -372,7 +319,6 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                         <form action="/dist/profile-attraction.php" method="submit">
                         <input type="hidden" name="id" value="'.$id.'"/>
                         <input type="hidden" name="type" value="edit"/>
-
                         <button type="submit"  class="admin-panel__data-kit">
                           <svg width="16" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="path-1-outside-1_1154_12363" maskUnits="userSpaceOnUse" x="3" y="4" width="17" height="17" fill="black" >
