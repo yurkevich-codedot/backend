@@ -20,7 +20,7 @@ if($table_name)
   }
   else if($table_name == 'news')
   {
-    $data_view = mysqli_query($mysqli,"SELECT * FROM `newsinfo` ORDER BY `newsinfo`.`id` DESC");
+    $data_view = mysqli_query($mysqli,"SELECT * FROM `newsinfo` ORDER BY `newsinfo`.`id`");
     $data_columns = mysqli_query($mysqli, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`= 'newsinfo' ORDER BY ordinal_position");
     $sort_columns = mysqli_query($mysqli, "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`= 'newsinfo' ORDER BY ordinal_position");
   }
@@ -253,9 +253,9 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                   {
                     $item[0] = 'Населенный пункт';
                   }
-                  else if($item[0]=='date')
+                  else if($item[0]=='locality_id')
                   {
-                    $item[0] = 'Дата основания';
+                    $item[0] = 'Код н.п.';
                   }
                   else if($item[0]=='discription')
                   {
@@ -372,7 +372,7 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                     while($row = mysqli_fetch_row($data_view)){
                       $data_id = mysqli_fetch_row($data);
                       $id = $data_id[0];
-                      echo  '<div class="admin-panel__item">';
+                      echo  '<div onclick="window.location.href=\'/dist/paragraph.php?id='.$id.'\'" class="admin-panel__item admin-panel__item-link">';
                       foreach($row as $item){
                         if($first == false) {
                           $first = true;
@@ -388,7 +388,6 @@ $data = mysqli_query($mysqli, 'SELECT * FROM ' . $_GET['table']);
                         <form action="/dist/profile-article.php" method="submit">
                         <input type="hidden" name="id" value="'.$id.'"/>
                         <input type="hidden" name="type" value="edit"/>
-
                         <button type="submit"  class="admin-panel__data-kit">
                           <svg width="16" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="path-1-outside-1_1154_12363" maskUnits="userSpaceOnUse" x="3" y="4" width="17" height="17" fill="black" >

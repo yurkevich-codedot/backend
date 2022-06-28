@@ -54,9 +54,9 @@ require ('./header.php');
           $extquery = "";
           if(isset($_REQUEST['id']))
           {
-            $extquery = "where locality_id=".$_REQUEST['id'];
+            $extquery = "where locality_id=" . $_REQUEST['id'];
           }
-          $attractions = mysqli_query($mysqli,'SELECT * FROM `attractioninfo`  '.$extquery);
+          $attractions = mysqli_query($mysqli, 'SELECT * FROM `attractioninfo` '.$extquery);
           $categories = mysqli_query($mysqli, 'SELECT * FROM `categories` WHERE id IN (SELECT `attraction`.`category_id` FROM `attraction` '.$extquery.' )');
           $info = mysqli_fetch_all($attractions);
           $titles = mysqli_fetch_all($categories);
@@ -67,7 +67,7 @@ require ('./header.php');
                             <div class="swiper-wrapper swiper-flex">';
                             foreach($info as $item)
                             {
-                                if($title[1]==$item[3] && $item[10]==0)
+                                if($title[1]==$item[3] && $item[9]==0)
                                 {
                                   $file = $_SERVER['DOCUMENT_ROOT']."/dist/img/uploads/attractions/$item[0]/0.png";
                                   $file_exists = file_exists($file);
@@ -106,7 +106,6 @@ require ('./header.php');
        <div class="swiper-scrollbar"></div>
      </div>';
           }
-          
           ?>
         </div>
       </div>
@@ -167,7 +166,6 @@ require ('./header.php');
                         <div>
                           <p>${feature.properties.category}(${feature.properties.type})</p>
                           <p>Адрес: ${feature.properties.place}</p>
-                          <p>Дата основания: ${feature.properties.date}</p>
                         </div>
                       </div>
                       <a href="attraction.php?id=${feature.properties.id}">Подробнее</a>`

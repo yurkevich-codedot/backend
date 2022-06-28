@@ -110,7 +110,7 @@ $isUserRatet = mysqli_num_rows($result);
               {
                 echo '
               <div class="attraction__item-discription">
-              <pre>'.$item[8].'<pre>
+              <pre>'.$item[7].'<pre>
               </div> ';             
             }
               ?>
