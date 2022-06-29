@@ -19,7 +19,7 @@ if($_REQUEST['type'] == 'attractions') {
     $coordinates = $_REQUEST["coordinates"];
     $types_id = $_REQUEST["item_type"];
     $is_suggest = ($_REQUEST['method'] == 'add') ? 0 :  
-    (isset($_REQUEST['suggest']) ? 1 : 0 );
+    (isset($_REQUEST['suggest']) ? 0 : 1 );
     $discription = $_REQUEST["item_description"];
 
     if($_SESSION['role']=='admin')
